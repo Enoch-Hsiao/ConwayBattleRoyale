@@ -23,6 +23,22 @@ body {
   margin: 5px;
 }
 
+#gameInfoDiv {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin: 5px;
+}
+
+#stats {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin: 5px;
+}
+
 input[type=text], select {
   width: 100%;
   padding: 12px 20px;

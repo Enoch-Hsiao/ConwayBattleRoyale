@@ -118,6 +118,7 @@ async function startGame() {
     }
 
     for (let genNum = 0; genNum < MAX_GEN_NUM; ++genNum) {
+      document.getElementById("genNumCounter").innerHTML = genNum + 1;
       await sleep(TIME_PER_GENERATION);
       // console.log("--------------------");
       // console.log("GENERATION " + (genNum + 1));
@@ -204,6 +205,7 @@ function reset() {
   document.getElementById("numBoxes").disabled = false;
   document.getElementById("maxPixelNum").disabled = false;
   document.getElementById("timePerGen").disabled = false;
+  document.getElementById("genNumCounter").innerHTML = 0;
   MAX_GEN_NUM = null;
   NUM_BOXES = null;
   MAX_BOX_COUNT = null;

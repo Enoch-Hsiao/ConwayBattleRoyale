@@ -7,16 +7,12 @@
   </head>
   <body>
     <div id="title">
-      <h2>
+      <h1>
         Conway's Game of Death
-      </h2>
+      </h1>
     </div>
     <div id="game-container">
-      <!-- Player 1 is assumed host -->
-      <div id="player1">
-        <h3>
-        Player 1
-        </h3>
+      <div id="gameInfoDiv">
         <div id="game-parameters">
           <form method="post" name="game-parameters" id="form-game-parameters">
             <div id="number-of-pixels-input">
@@ -51,14 +47,15 @@
       <div id="game-board">
         <canvas id="game-canvas"></canvas>
       </div>
-      <div id="player2">
-        <h3>
-        Player 2
-        </h3>
+      <div id="stats">
+        <div style="margin-bottom: 100px;">
+          <h1>Generation Number: </h1>
+          <h1 id="genNumCounter" style="text-align: center;">0</h1>
+        </div>
         <div id="help">
           <button id="help-button">
             ?
-           </button>
+          </button>
           <div id="help-modal" class="modal">
             <div class="modal-content">
               <span class="close-button-help-model">&times;</span>
