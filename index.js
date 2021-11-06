@@ -3,9 +3,10 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const gameBoardDiv = document.getElementById("gameBoard").getBoundingClientRect();
 
-const numBoxes = 100;
-canvas.width = gameBoard.width;
-canvas.height = gameBoard.height;
+const numBoxes = 30;
+canvas.width = gameBoardDiv.height;
+canvas.height = gameBoardDiv.height;
+const boxSize = gameBoardDiv.height/ numBoxes;
 
 const cols = numBoxes;
 const rows = numBoxes;
@@ -20,12 +21,11 @@ const grid = buildGrid();
 render(grid);
 
 function render(grid) {
-    for(let col = 0; col < grid.length; col++){
-        for (let row = 0; row < grid[col].length; row++){
-            const cell = grid[col][row];
-
+    for (let col = 0; col < numBoxes; col++) {
+        for (let row = 0; row < numBoxes; row++) {
+            const box = grid[col][row];
             ctx.beginPath();
-            ctx.rect(col * numBoxes, row * numBoxes, numBoxes, numBoxes);
+            ctx.rect(col * boxSize, row * boxSize, boxSize, boxSize);
             ctx.stroke();
         }
     }
