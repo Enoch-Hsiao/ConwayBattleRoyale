@@ -3,20 +3,14 @@ let helpButton = document.getElementById("help-button");
 let closeButtonHelpButton = document.getElementsByClassName("close-button-help-model")[0];
 
 helpButton.onclick = function() {
-  helpButton.style.background = '#202020';
-  helpButton.style.color = 'white';
-  helpModal.style.display = "block";
+  helpModal.style.display = "flex";
 }
 closeButtonHelpButton .onclick = function() {
   helpModal.style.display = "none";
-  helpButton.style.background = 'white';
-  helpButton.style.color = 'black';
 }
 window.onclick = function(event) {
-  if (event.target == helpModal) {
+  if (event.target === helpModal) {
     helpModal.style.display = "none";
-    helpButton.style.background = 'white';
-    helpButton.style.color = 'black';
   }
 }
 
