@@ -33,7 +33,7 @@
             <h4 id="max-pixel-num">
               Number of Pixels:
             </h4>
-            <h4 id="number-of-iterations-input">
+            <h4 id="number-of-iterations">
               Number of Iterations:
             </h4>
             <h4 id="number-of-board-size">
@@ -70,7 +70,7 @@
             </div>
             <!-- <input type="submit" value="Submit" onclick="setParams()"> -->
           </form>
-          <button id="submit" onclick="initializeGame()">Enter</button>
+          <button id="submit">Start Game</button>
         </div>
       </div>
       <div id="game-board">
@@ -118,12 +118,15 @@
             </div>
           </div>
         </div>
+        <div id="submit-button">
+          <button class="game-button" onclick="submitBlocks()">Submit Blocks!</button>
+        </div>
       </div>
     </div>
-    <div style="margin-top: 20px; text-align: center;">
-      <button id="filler-button" class="game-button" onclick="switchTool('f')" disabled="true">Fill</button>
-      <button id="eraser-button" class="game-button" onclick="switchTool('e')">Erase</button>
-      <button id="start-button" class="game-button" onclick="startGame()">Start Game!</button>
+    <div id="game-buttons" style="margin-top: 20px; text-align: center;">
+      <button id="filler-button" class="game-button" disabled="true">Fill</button>
+      <button id="eraser-button" class="game-button">Erase</button>
+      <!-- <button id="start-button" class="game-button" onclick="startGame()">Start Game!</button> -->
     </div>
     <script type="text/javascript" src="../scripts/initializemultiplayer.js"></script>
     <script type="module" src="../scripts/multiplayer.js"></script>
