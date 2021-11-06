@@ -2,9 +2,11 @@ let MAX_GEN_NUM = null;
 let NUM_BOXES = null;
 let MAX_BOX_COUNT = null;
 let TIME_PER_GENERATION = null;
+let CAN_EDIT = false;
 
 const gameCanvas = document.getElementById("game-canvas");
 const gameCtx = gameCanvas.getContext('2d');
+// const gameContainerWidth = Math.floor(document.getElementById("game-container").getBoundingClientRect().width);
 const gameContainerHeight = Math.floor(document.getElementById("game-container").getBoundingClientRect().height);
 gameCtx.imageSmoothingEnabled = false;
 gameCanvas.width = gameContainerHeight;
@@ -15,21 +17,22 @@ let boxHeight = null;
 
 let clicked = false;
 let numBoxesUsed = 0;
-let toolSelected = "filler";
+let toolSelected = null;
 
 function initializeGame() {
   if(setParams()) {
     makeGrid();
     gameCanvas.addEventListener('mousedown', function(e) {
       clicked = true;
-      handleBoxClick(e);
+      if (CAN_EDIT) { handleBoxClick(e); }
     });
     gameCanvas.addEventListener('mouseup', function(e) {
       clicked = false;
     });
     gameCanvas.addEventListener('mousemove', function(e) {
-      if (clicked) handleBoxClick(e);
+      if (clicked && CAN_EDIT) { handleBoxClick(e); }
     });
+    CAN_EDIT = true;
   }
 }
 
@@ -56,6 +59,7 @@ function setParams() {
     NUM_BOXES = nb;
     MAX_BOX_COUNT = mbc;
     TIME_PER_GENERATION = tpg;
+    CAN_EDIT = true;
     boxWidth = gameCanvas.width / NUM_BOXES;
     boxHeight = boxWidth;
     return true;
@@ -64,12 +68,12 @@ function setParams() {
 
 function makeGrid() {
   gameCtx.beginPath();
-  for (let row = 0; row < NUM_BOXES; ++row) {
+  for (let row = 0; row <= NUM_BOXES; ++row) {
     gameCtx.moveTo(0, row * boxWidth);
     gameCtx.lineTo(gameCanvas.width, row * boxWidth);
   }
 
-  for (let col = 0; col < NUM_BOXES; ++col) {
+  for (let col = 0; col <= NUM_BOXES; ++col) {
     gameCtx.moveTo(col * boxWidth, 0);
     gameCtx.lineTo(col * boxWidth, gameCanvas.height);
   }

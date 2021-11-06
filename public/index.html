@@ -23,25 +23,25 @@
               <h4>
                 Number of Pixels
               </h4>
-              <input type="text" id="maxPixelNum" name="maxPixelNum" value="15">
+              <input type="text" id="maxPixelNum" name="maxPixelNum" value="30" style="text-align: center;">
             </div>
             <div id="number-of-iterations-input">
               <h4>
                 Number of Iterations
               </h4>
-              <input type="text" id="numGenerations" name="numGenerations" value="500">
+              <input type="text" id="numGenerations" name="numGenerations" value="500" style="text-align: center;">
             </div>
             <div id="number-of-board-size">
               <h4>
-                Board Width
+                Board Size
               </h4>
-              <input type="text" id="numBoxes" name="numBoxes" value="30">
+              <input type="text" id="numBoxes" name="numBoxes" value="30" style="text-align: center;">
             </div>
             <div id="time-per-generation">
               <h4>
                 Time Per Generation (ms)
               </h4>
-              <input type="text" id="timePerGen" name="timePerGen" value="50">
+              <input type="text" id="timePerGen" name="timePerGen" value="50" style="text-align: center;">
             </div>
             <!-- <input type="submit" value="Submit" onclick="setParams()"> -->
           </form>
@@ -68,9 +68,10 @@
       </div>
     </div>
     <div style="margin-top: 20px; text-align: center;">
-      <button id="filler-button" class="game-button" onclick="switchTool('f')" disabled="true">Fill</button>
+      <button id="filler-button" class="game-button" onclick="switchTool('f')">Fill</button>
       <button id="eraser-button" class="game-button" onclick="switchTool('e')">Erase</button>
       <button id="start-button" class="game-button" onclick="startGame()">Start Game!</button>
+      <button id="reset-button" class="game-button" onclick="reset()">Reset</button>
     </div>
     <script type="text/javascript" src="initialize.js"></script>
     <script type="text/javascript" src="index.js"></script>

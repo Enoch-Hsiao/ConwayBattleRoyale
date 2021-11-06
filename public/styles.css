@@ -35,19 +35,21 @@ input[type=text], select {
   border: 1px solid black;
 }
 
+h4 {
+  text-align: center;
+  margin-bottom: 4px;
+}
+
 #filler-button {
-  border-radius: 4%;
-  border: 3px solid black;
+
 }
 
 #eraser-button {
-  border-radius: 4%;
-  border: 3px solid black;
+
 }
 
 #start-button {
-  border-radius: 4%;
-  border: 3px solid black;
+
 }
 
 .game-button {
@@ -99,7 +101,8 @@ input[type="submit"]{
 
 /* button transition styling referenced from https://codepen.io/ozer/pen/KwvKoR */
 .game-button {
-    border-radius: 0px;
+    border-radius: 4%;
+    border: 3px solid black;
     text-decoration: none;
     padding: 14px 21px;
     font-size: 13px;
@@ -210,5 +213,4 @@ input[type="submit"]:hover,
 
 #game-canvas {
   background-color: white;
-  border: 1px solid black;
 }
