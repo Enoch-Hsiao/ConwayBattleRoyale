@@ -1,17 +1,41 @@
 html {
   margin: 0;
+  overflow-x: scroll;
+}
+
+#container {
+  min-width: 1000px;
 }
 
 #gameContainer {
   width: 100%;
   height: 90vh;
   display: flex;
-  position: relative;
   justify-content: center;
 }
 
+#title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#player1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#player2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 #gameBoard {
-  width: 70%;
   display: flex;
   justify-content: center;
   align-items: center;
