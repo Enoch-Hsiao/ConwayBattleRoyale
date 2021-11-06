@@ -83,6 +83,7 @@ async function startGame() {
   if (NUM_BOXES === null) {
     alert("Please submit your game parameters before starting the game");
   } else {
+    document.getElementById("start-button").disabled = true;
     CAN_EDIT = false;
     // Scale the game board down so that each box is represented by a single pixel on a new "canvas" represented by a 2D array
     let gameBoardArrayInitial = [];
@@ -118,15 +119,11 @@ async function startGame() {
     }
 
     for (let genNum = 0; genNum < MAX_GEN_NUM; ++genNum) {
+      let changesExist = false;
       document.getElementById("genNumCounter").innerHTML = genNum + 1;
       await sleep(TIME_PER_GENERATION);
-      // console.log("--------------------");
-      // console.log("GENERATION " + (genNum + 1));
-      // console.log("--------------------");
-      // Run the simulation
       for (let col = 0; col < NUM_BOXES; ++col) {
         for (let row = 0; row < NUM_BOXES; ++row) {
-          // console.log("curCell = (" + row + ", " + col + ")");
           const cell = previousGen[col][row]; // specific box
           let numNeighbors = 0; // amount of neighbors cell has
           for (let i = -1; i <= 1; ++i) { //finding current cell's neighbors. 3x3 square w/o the center square
@@ -148,18 +145,21 @@ async function startGame() {
           //rules of game
           //underpopulation
           if(cell.isAlive && numNeighbors < 2) { //if cur cell has less than 2 neighbors
+            changesExist = true;
             // console.log("Killing cell at (" + row + ", " + col + ") underpopulation");
             nextGen[col][row].isAlive = false;
             nextGen[col][row].controllingPlayer = null;
           }
           //overpopulation
           else if(cell.isAlive && numNeighbors > 3 ) { //if cur cell has more than 3 neighbors
+            changesExist = true;
             // console.log("Killing cell at (" + row + ", " + col + ") overpopulation");
             nextGen[col][row].isAlive = false;
             nextGen[col][row].controllingPlayer = null;
           }
           //revive
           else if(!cell.isAlive && numNeighbors === 3 ) { //if cur cell has exactly 3 neighbors and is dead
+            changesExist = true;
             // console.log("Reviving cell at (" + row + ", " + col + ")");
             nextGen[col][row].isAlive = true;
             nextGen[col][row].controllingPlayer = 1;
@@ -167,6 +167,7 @@ async function startGame() {
         }
       }
       await(showOnScreen(nextGen));
+      if (!changesExist) { break; }
       previousGen = makeCopy2D(nextGen);
     }
   }
@@ -201,6 +202,7 @@ function showOnScreen(generationInfo) {
 function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
 function reset() {
+  document.getElementById("start-button").disabled = false;
   document.getElementById("numGenerations").disabled = false;
   document.getElementById("numBoxes").disabled = false;
   document.getElementById("maxPixelNum").disabled = false;
@@ -215,5 +217,4 @@ function reset() {
   clicked = false;
   numBoxesUsed = 0;
   gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-
 }

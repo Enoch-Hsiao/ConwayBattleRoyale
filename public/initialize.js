@@ -6,7 +6,6 @@ let CAN_EDIT = false;
 
 const gameCanvas = document.getElementById("game-canvas");
 const gameCtx = gameCanvas.getContext('2d');
-// const gameContainerWidth = Math.floor(document.getElementById("game-container").getBoundingClientRect().width);
 const gameContainerHeight = Math.floor(document.getElementById("game-container").getBoundingClientRect().height);
 gameCtx.imageSmoothingEnabled = false;
 gameCanvas.width = gameContainerHeight;
