@@ -1,6 +1,58 @@
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js'
+import { getDatabase, ref, set, push, child, get } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-database.js";
+
+// TODO: Replace the following with your app's Firebase project configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAODKoKrUY4-8QWpN_jnunw5So9LvG3ERM",
+  authDomain: "conways-game-of-death.firebaseapp.com",
+  databaseURL: "https://conways-game-of-death-default-rtdb.firebaseio.com",
+  projectId: "conways-game-of-death",
+  storageBucket: "conways-game-of-death.appspot.com",
+  messagingSenderId: "493535520033",
+  appId: "1:493535520033:web:fb20cbcc9f5bfdf3b88a60"
+};
+
+const app = initializeApp(firebaseConfig);
+
+let database = getDatabase(app);
+// assume user is host
+let keyValueForGame = push(ref(database, 'gameSessions'), {
+    numPixels: 15,
+    iterations: 500,
+    boardSize: 30,
+    timerPerGeneration: 50
+  }).key;
+
+let host = true
+document.getElementById("game-PIN-value").innerHTML = 'Game PIN:' + keyValueForGame
+
+const dbRef = ref(getDatabase());
+function checkPIN() {
+  let PIN = document.getElementById('game-PIN').value;
+  console.log(PIN.trim());
+  if (PIN.trim() === '') {
+    document.getElementById("not-valid").innerHTML = 'PIN is blank!';
+    return;
+  }
+  if (PIN === keyValueForGame) {
+    document.getElementById("not-valid").innerHTML = 'You cannot join your own game!';
+    return;
+  }
+  get(child(dbRef, `gameSessions/${PIN}`)).then((snapshot) => {
+    console.log(snapshot);
+    if (snapshot.exists()) {
+      document.getElementById("game-PIN-value").innerHTML = 'Game PIN:' + PIN;
+      document.getElementById("join-game").display = "none";
+      host = false;
+    } else {
+      document.getElementById("not-valid").innerHTML = 'No game found for game PIN!';
+    }
+  })
+}
+
+document.getElementById('Enter Game').addEventListener('click', checkPIN);
+
 initialCss();
-
-
 
 function initialCss() {
   let fillerButton = document.getElementById("filler-button");

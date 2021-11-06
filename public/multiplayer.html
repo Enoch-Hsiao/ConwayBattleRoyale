@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Game</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="multiplayer.css">
   </head>
   <body>
     <div id="title">
@@ -12,9 +12,17 @@
     <div id="game-container">
       <!-- Player 1 is assumed host -->
       <div id="player1">
-        <h3>
-        Player 1
-        </h3>
+        <div id="player1-text"
+          <h3>
+          <span>
+            <img src="star.png" alt="star" width="25" height="25">
+          </span>
+          Player 1 (Host)
+          </h3>
+        </div>
+          <h2 id="game-PIN-value"> 
+            Game PIN:
+          </h2>
         <div id="game-parameters">
           <form method="post" name="game-parameters" id="form-game-parameters">
             <div id="number-of-pixels-input">
@@ -53,10 +61,18 @@
         <h3>
         Player 2
         </h3>
-        <div id="help">
+        <div id="join-game">
+          <h4>
+            Join Game
+          </h4>
+          <input type="text" id="game-PIN" name="game-PIN" value="">
+          <button id="Enter Game" class="enter-game-button">Enter</button>
+          <h4 id="not-valid"></h4>
           <button id="help-button">
             ?
            </button>
+        </div>
+        <div id="help">
           <div id="help-modal" class="modal">
             <div class="modal-content">
               <span class="close-button-help-model">&times;</span>
@@ -86,6 +102,6 @@
       <button id="start-button" class="game-button" onclick="startGame()">Start Game!</button>
     </div>
     <script type="text/javascript" src="initialize.js"></script>
-    <script type="text/javascript" src="multiplayer.js"></script>
+    <script type="module" src="multiplayer.js"></script>
   </body>
 </html>

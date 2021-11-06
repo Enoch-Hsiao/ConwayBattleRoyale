@@ -52,7 +52,7 @@ h4 {
 
 }
 
-.game-button, .mode-button {
+.game-button, .mode-button, .enter-game-button {
   background-color:white;
   color: black;
   padding: 14px 20px;
@@ -61,6 +61,13 @@ h4 {
 }
 
 #game-parameters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#join-game {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,8 +86,12 @@ h4 {
 	overflow: hidden;
 }
 
+#not-valid {
+  color: #D8000C;
+}
+
 /* button transition styling referenced from https://codepen.io/ozer/pen/KwvKoR */
-#submit{
+#submit, .enter-game-button  {
 	cursor: pointer;
   background-color:white;
   border-radius: 0px;
@@ -98,8 +109,7 @@ h4 {
         -o-transition: all .4s ease-in-out;
           transition: all .4s ease-in-out;
 }
-
-.mode-button {
+.mode-button, .enter-game-button {
   border-radius: 4%;
   border: 3px solid black;
   text-decoration: none;
@@ -116,7 +126,7 @@ h4 {
 }
 
 /* button transition styling referenced from https://codepen.io/ozer/pen/KwvKoR */
-.game-button, .mode-button {
+.game-button, .mode-button, .enter-game-button {
     border-radius: 4%;
     border: 3px solid black;
     text-decoration: none;
@@ -137,6 +147,7 @@ h4 {
 .game-button:hover,
 .mode-button:hover,
 #submit:hover,
+.enter-game-button:hover,
 #help-button:hover{
     -webkit-transition: all .4s ease-in-out;
        -moz-transition: all .4s ease-in-out;
@@ -149,7 +160,8 @@ h4 {
 .game-button:hover,
 #submit:hover,
 .game-button.active,
-.mode-button:hover{
+.mode-button:hover,
+.enter-game-button:hover{
     border: solid 3px #1f1f1f;
     background: #505050;
     color: #fff;
