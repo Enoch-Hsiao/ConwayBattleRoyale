@@ -12,10 +12,41 @@ gameCanvas.height = gameContainerHeight;
 let boxWidth = gameCanvas.width / NUM_BOXES;
 let boxHeight = boxWidth;
 
+initialCss();
 makeGrid();
 let clicked = false;
 let numBoxesUsed = 0;
 let toolSelected = "filler";
+
+function initialCss() {
+    let fillerButton = document.getElementById("filler-button");
+    fillerButton.disabled = true;
+    fillerButton.style.background = '#202020';
+    fillerButton.style.color = 'white';
+}
+let helpModal = document.getElementById("help-modal");
+let helpButton = document.getElementById("help-button");
+let closeButtonHelpButton = document.getElementsByClassName("close-button-help-model")[0];
+
+helpButton.onclick = function() {
+  helpButton.style.background = '#202020';
+  helpButton.style.color = 'white';
+  helpModal.style.display = "block";
+}
+
+closeButtonHelpButton .onclick = function() {
+  helpModal.style.display = "none";
+  helpButton.style.background = 'white';
+  helpButton.style.color = 'black';
+}
+
+window.onclick = function(event) {
+  if (event.target == helpModal) {
+    helpModal.style.display = "none";
+    helpButton.style.background = 'white';
+    helpButton.style.color = 'black';
+  }
+}
 
 gameCanvas.addEventListener('mousedown', function(e) {
   clicked = true;
@@ -92,12 +123,24 @@ function makeGrid() {
 function switchTool(tool) {
   if (tool === 'f') {
     toolSelected = "filler";
-    document.getElementById("fillerButton").disabled = true;
-    document.getElementById("eraserButton").disabled = false;
+    let fillerButton = document.getElementById("filler-button");
+    fillerButton.disabled = true;
+    fillerButton.style.background = '#202020';
+    fillerButton.style.color = 'white';
+    let eraserButton = document.getElementById("eraser-button");
+    eraserButton.disabled = false;
+    eraserButton.style.background = 'white';
+    eraserButton.style.color = 'black';
   } else {
     toolSelected = "eraser";
-    document.getElementById("eraserButton").disabled = true;
-    document.getElementById("fillerButton").disabled = false;
+    let eraserButton = document.getElementById("eraser-button");
+    eraserButton.disabled = true;
+    eraserButton.style.background = '#202020';
+    eraserButton.style.color = 'white';
+    let fillerButton = document.getElementById("filler-button");
+    fillerButton.disabled = false;
+    fillerButton.style.background = 'white';
+    fillerButton.style.color = 'black';
   }
 }
 
