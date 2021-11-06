@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Game</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id="title">
+      <h2>
+        Conway's Game of Death
+      </h2>
+    </div>
+    <div id="main-container">
+      <div id="game-container">
+        <div id="player1" class="player-div">
+          <h3>
+          Player 1
+          </h3>
+        </div>
+        <canvas id="game-canvas"></canvas>
+        <div id="player2" class="player-div">
+          <h3>
+          Player 2
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button id="fillerButton" onclick="switchTool('f')" disabled="true">FILLER</button>
+      <button id="eraserButton" onclick="switchTool('e')">ERASER</button>
+      <button onclick="startGame()">START GAME</button>
+    </div>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
