@@ -84,6 +84,7 @@ async function startGame() {
     alert("Please submit your game parameters before starting the game");
   } else {
     document.getElementById("start-button").disabled = true;
+    numBoxesUsed = MAX_BOX_COUNT;
     CAN_EDIT = false;
     // Scale the game board down so that each box is represented by a single pixel on a new "canvas" represented by a 2D array
     let gameBoardArrayInitial = [];
@@ -212,8 +213,6 @@ function reset() {
   NUM_BOXES = null;
   MAX_BOX_COUNT = null;
   TIME_PER_GENERATION = null;
-  boxWidth = null;
-  boxHeight = null;
   clicked = false;
   numBoxesUsed = 0;
   gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
