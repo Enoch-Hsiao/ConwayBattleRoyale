@@ -104,18 +104,20 @@ function startGame() {
   // Scale the game board down so that each box is represented by a single pixel on a new "canvas" represented by a 2D array
   let gameBoardArray = [];
   for (let row = 0; row < NUM_BOXES; ++row) {
+    let innerArr = [];
     for (let boxInRow = 0; boxInRow < NUM_BOXES; ++boxInRow) {
-      let innerArr = [];
       let centerCoord = {cx: boxInRow * boxHeight + boxHeight / 2, cy: row * boxHeight + boxHeight / 2}
       let pcolor = gameCtx.getImageData(centerCoord.cx, centerCoord.cy, 1, 1).data;
       if (pcolor.filter((e) => e === 0).length === 4 || pcolor.filter((e) => e === 255).length === 4) {
-        innerArr.push({x: centerCoord.cx, y: centerCoord.cy, color: [255, 255, 255]});
+        innerArr.push({isDead: true, controllingPlayer: null});
       } else {
-        innerArr.push({x: centerCoord.cx, y: centerCoord.cy, color: [pcolor[0], pcolor[1], pcolor[2]]});
+        innerArr.push({isDead: false, controllingPlayer: 1});
       }
-      gameBoardArray.push(innerArr);
     }
+    gameBoardArray.push(innerArr);
   }
+
+  console.log(gameBoardArray);
 
   for (let genNum = 0; genNum < MAX_GEN_NUM; ++genNum) {
     // Run the simulation
