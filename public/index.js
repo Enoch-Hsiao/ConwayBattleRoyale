@@ -1,28 +1,12 @@
-const MAX_GEN_NUM = 1000;
-const NUM_BOXES = 50;
-const maxBoxCount = 100;
-const gameCanvas = document.getElementById("game-canvas");
-const gameCtx = gameCanvas.getContext('2d');
-const gameContainerHeight = Math.floor(document.getElementById("game-container").getBoundingClientRect().height);
-gameCtx.imageSmoothingEnabled = false;
-
-gameCanvas.width = gameContainerHeight;
-gameCanvas.height = gameContainerHeight;
-
-let boxWidth = gameCanvas.width / NUM_BOXES;
-let boxHeight = boxWidth;
-
 initialCss();
-makeGrid();
-let clicked = false;
-let numBoxesUsed = 0;
-let toolSelected = "filler";
+
+
 
 function initialCss() {
-    let fillerButton = document.getElementById("filler-button");
-    fillerButton.disabled = true;
-    fillerButton.style.background = '#202020';
-    fillerButton.style.color = 'white';
+  let fillerButton = document.getElementById("filler-button");
+  fillerButton.disabled = true;
+  fillerButton.style.background = '#202020';
+  fillerButton.style.color = 'white';
 }
 let helpModal = document.getElementById("help-modal");
 let helpButton = document.getElementById("help-button");
@@ -33,13 +17,11 @@ helpButton.onclick = function() {
   helpButton.style.color = 'white';
   helpModal.style.display = "block";
 }
-
 closeButtonHelpButton .onclick = function() {
   helpModal.style.display = "none";
   helpButton.style.background = 'white';
   helpButton.style.color = 'black';
 }
-
 window.onclick = function(event) {
   if (event.target == helpModal) {
     helpModal.style.display = "none";
@@ -48,24 +30,11 @@ window.onclick = function(event) {
   }
 }
 
-gameCanvas.addEventListener('mousedown', function(e) {
-  clicked = true;
-  handleBoxClick(e);
-});
-
-gameCanvas.addEventListener('mouseup', function(e) {
-  clicked = false;
-});
-
-gameCanvas.addEventListener('mousemove', function(e) {
-  if (clicked) handleBoxClick(e);
-});
-
 function handleBoxClick(e) {
   let cursorPosition = getCursorPosition(e);
   let pixel = gameCtx.getImageData(cursorPosition.x, cursorPosition.y, 1, 1).data;
   // If the pixel has 0 opacity then color it in when clicked (0 opacity means white)
-  if (toolSelected === "filler" && (pixel[3] === 0 || pixel[0] === 255 && pixel[1] === 255 && pixel[2] === 255) && numBoxesUsed < maxBoxCount) {
+  if (toolSelected === "filler" && (pixel[3] === 0 || pixel[0] === 255 && pixel[1] === 255 && pixel[2] === 255) && numBoxesUsed < MAX_BOX_COUNT) {
     let color = "#FF0000";
     // TODO: UPDATE LIVE COUNTER ON SCREEN
     numBoxesUsed += 1;
@@ -102,24 +71,6 @@ function colorBox(x, y, color) {
   gameCtx.stroke();
 }
 
-function makeGrid() {
-  gameCtx.beginPath();
-  for (let row = 0; row < NUM_BOXES; ++row) {
-      gameCtx.moveTo(0, row * boxWidth);
-      gameCtx.lineTo(gameCanvas.width, row * boxWidth);
-  }
-
-  for (let col = 0; col < NUM_BOXES; ++col) {
-    gameCtx.moveTo(col * boxWidth, 0);
-    gameCtx.lineTo(col * boxWidth, gameCanvas.height);
-  }
-
-  // Make the center dividing line
-  gameCtx.moveTo(Math.round(gameCanvas.width / 2), 0);
-  gameCtx.lineTo(Math.round(gameCanvas.width / 2), gameCanvas.height);
-  gameCtx.stroke();
-}
-
 function switchTool(tool) {
   if (tool === 'f') {
     toolSelected = "filler";
@@ -145,7 +96,6 @@ function switchTool(tool) {
 }
 
 async function startGame() {
-  document.getElementById("start-game");
   // Scale the game board down so that each box is represented by a single pixel on a new "canvas" represented by a 2D array
   let gameBoardArrayInitial = [];
   for (let row = 0; row < NUM_BOXES; ++row) {
@@ -180,7 +130,7 @@ async function startGame() {
   }
 
   for (let genNum = 0; genNum < MAX_GEN_NUM; ++genNum) {
-    await sleep(50);
+    await sleep(TIME_PER_GENERATION);
     // console.log("--------------------");
     // console.log("GENERATION " + (genNum + 1));
     // console.log("--------------------");
