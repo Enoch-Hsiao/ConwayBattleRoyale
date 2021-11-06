@@ -4,17 +4,19 @@
     <meta charset="utf-8">
     <title>Game</title>
     <link rel="stylesheet" href="../styles/universal.css">
+    <link rel="stylesheet" href="../styles/multiplayer.css">
   </head>
   <body>
     <div id="title">
       <a href="../singleplayer/index.html" class='mode-button'><button class='mode-button'>Switch to Singleplayer Mode</button></a>
+      <h3 id="game-state"></h3>
     </div>
     <div id="game-container">
       <!-- Player 1 is assumed host -->
       <div id="player1">
         <div id="player1-text"
           <h3>
-          <span>
+          <span id="star-player-1">
             <img src="star.png" alt="star" width="25" height="25">
           </span>
           Player 1 (Host)
@@ -27,6 +29,20 @@
         Player 1
         </h3>
         <div id="game-parameters">
+          <div id="player2-parameters">
+            <h4 id="max-pixel-num">
+              Number of Pixels:
+            </h4>
+            <h4 id="number-of-iterations-input">
+              Number of Iterations:
+            </h4>
+            <h4 id="number-of-board-size">
+              Board Size:
+            </h4>
+            <h4 id="time-per-generation">
+              Time Per Generation (ms):
+            </h4>
+          </div>
           <form method="post" name="game-parameters" id="form-game-parameters">
             <div id="number-of-pixels-input">
               <h4>
@@ -61,9 +77,22 @@
         <canvas id="game-canvas"></canvas>
       </div>
       <div id="player2">
-        <h3>
-        Player 2
-        </h3>
+        <div id="player2-text">
+          <h3>
+          <span id="star-player-2">
+            <img src="star.png" alt="star" width="25" height="25">
+          </span>
+          Player 2
+          </h3>
+        </div>
+        <div id="join-game">
+          <h4>
+            Join Game
+          </h4>
+          <input type="text" id="game-PIN" name="game-PIN" value="">
+          <button id="Enter Game" class="enter-game-button">Enter</button>
+          <h4 id="not-valid"></h4>
+        </div>
         <div id="help">
           <button id="help-button">
             ?
@@ -97,6 +126,6 @@
       <button id="start-button" class="game-button" onclick="startGame()">Start Game!</button>
     </div>
     <script type="text/javascript" src="../scripts/initializemultiplayer.js"></script>
-    <script type="text/javascript" src="../scripts/multiplayer.js"></script>
+    <script type="module" src="../scripts/multiplayer.js"></script>
   </body>
 </html>

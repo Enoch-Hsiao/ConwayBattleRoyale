@@ -131,7 +131,7 @@ h4 {
 }
 
 /* button transition styling referenced from https://codepen.io/ozer/pen/KwvKoR */
-.game-button {
+.game-button, .enter-game-button {
     border-radius: 4%;
     border: 3px solid black;
     text-decoration: none;
@@ -151,6 +151,7 @@ h4 {
 /* button transition styling referenced from https://codepen.io/ozer/pen/KwvKoR */
 .game-button:hover,
 .mode-button:hover,
+.enter-game-button:hover,
 #submit:hover,
 #help-button:hover{
     -webkit-transition: all .4s ease-in-out;
@@ -163,6 +164,7 @@ h4 {
 /* button styling referenced from https://codepen.io/ozer/pen/KwvKoR */
 .game-button:hover,
 .mode-button:hover,
+.enter-game-button:hover,
 #submit:hover,
 .game-button.active{
     border: solid 3px #1f1f1f;

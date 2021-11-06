@@ -1,1 +1,18 @@
+#star-player-2 {
+  display: none
+}
 
+#join-game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#player2 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin: 5px;
+}
