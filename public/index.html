@@ -11,19 +11,49 @@
         Conway's Game of Death
       </h2>
     </div>
-    <div id="main-container">
-      <div id="game-container">
-        <div id="player1" class="player-div">
-          <h3>
-          Player 1
-          </h3>
+    <div id="gameContainer">
+      <!-- Player 1 is assumed host -->
+      <div id="player1">   
+        <h3>
+        Player 1
+        </h3>
+        <div id="gameParameters">
+          <form>
+            <div id="numberOfPixelsInput">
+              <h4>
+                Number of pixels
+              </h4>
+              <input type="text" id="" name="Number of pixels" value="3">
+            </div>
+            <div id="numberOfIterationsInput">
+              <h4>
+                Number of iterations
+              </h4>
+              <input type="text" id="" name="Number of iterations" value="1000">
+            </div>
+            <div id="numberOfBoardWidth">
+              <h4>
+                Board Width
+              </h4>
+              <input type="text" id="" name="Board Width" value="30">
+            </div>
+            <div id="numberOfBoardLength">
+              <h4>
+                Board Length
+              </h4>
+              <input type="text" id="" name="Board Length" value="30">
+            </div>
+            <input type="submit" value="Submit">
+          </form>
         </div>
-        <canvas id="game-canvas"></canvas>
-        <div id="player2" class="player-div">
-          <h3>
-          Player 2
-          </h3>
-        </div>
+      </div>
+      <div id="gameBoard">
+        <canvas id="canvas"></canvas>
+      </div>
+      <div id="player2">
+        <h3>
+        Player 2
+        </h3>
       </div>
     </div>
     <div style="margin-top: 20px; text-align: center;">
