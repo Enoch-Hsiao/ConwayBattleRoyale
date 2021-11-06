@@ -1,8 +1,6 @@
-initialCss();
+initialCSS();
 
-
-
-function initialCss() {
+function initialCSS() {
   let fillerButton = document.getElementById("filler-button");
   fillerButton.disabled = true;
   fillerButton.style.background = '#202020';
