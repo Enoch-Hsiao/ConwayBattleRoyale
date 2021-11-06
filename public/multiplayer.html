@@ -7,35 +7,39 @@
   </head>
   <body>
     <div id="title">
-      <a href="multiplayer.html" class='mode-button'><button class='mode-button'>Switch to 1v1 Mode</button></a>
+      <a href="index.html" class='mode-button'><button class='mode-button'>Switch to Singleplayer Mode</button></a>
     </div>
     <div id="game-container">
-      <div id="gameInfoDiv">
+      <!-- Player 1 is assumed host -->
+      <div id="player1">
+        <h3>
+        Player 1
+        </h3>
         <div id="game-parameters">
           <form method="post" name="game-parameters" id="form-game-parameters">
             <div id="number-of-pixels-input">
               <h4>
                 Number of Pixels
               </h4>
-              <input type="text" id="maxPixelNum" name="maxPixelNum" value="30" style="text-align: center;">
+              <input type="text" id="maxPixelNum" name="maxPixelNum" value="15">
             </div>
             <div id="number-of-iterations-input">
               <h4>
                 Number of Iterations
               </h4>
-              <input type="text" id="numGenerations" name="numGenerations" value="500" style="text-align: center;">
+              <input type="text" id="numGenerations" name="numGenerations" value="500">
             </div>
             <div id="number-of-board-size">
               <h4>
                 Board Size
               </h4>
-              <input type="text" id="numBoxes" name="numBoxes" value="30" style="text-align: center;">
+              <input type="text" id="numBoxes" name="numBoxes" value="30">
             </div>
             <div id="time-per-generation">
               <h4>
                 Time Per Generation (ms)
               </h4>
-              <input type="text" id="timePerGen" name="timePerGen" value="50" style="text-align: center;">
+              <input type="text" id="timePerGen" name="timePerGen" value="50">
             </div>
             <!-- <input type="submit" value="Submit" onclick="setParams()"> -->
           </form>
@@ -45,15 +49,14 @@
       <div id="game-board">
         <canvas id="game-canvas"></canvas>
       </div>
-      <div id="stats">
-        <div style="margin-bottom: 100px;">
-          <h1>Generation Number: </h1>
-          <h1 id="genNumCounter" style="text-align: center;">0</h1>
-        </div>
+      <div id="player2">
+        <h3>
+        Player 2
+        </h3>
         <div id="help">
           <button id="help-button">
             ?
-          </button>
+           </button>
           <div id="help-modal" class="modal">
             <div class="modal-content">
               <span class="close-button-help-model">&times;</span>
@@ -78,12 +81,11 @@
       </div>
     </div>
     <div style="margin-top: 20px; text-align: center;">
-      <button id="filler-button" class="game-button" onclick="switchTool('f')">Fill</button>
+      <button id="filler-button" class="game-button" onclick="switchTool('f')" disabled="true">Fill</button>
       <button id="eraser-button" class="game-button" onclick="switchTool('e')">Erase</button>
       <button id="start-button" class="game-button" onclick="startGame()">Start Game!</button>
-      <button id="reset-button" class="game-button" onclick="reset()">Reset</button>
     </div>
     <script type="text/javascript" src="initialize.js"></script>
-    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="multiplayer.js"></script>
   </body>
 </html>
