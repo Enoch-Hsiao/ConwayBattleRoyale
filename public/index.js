@@ -1,6 +1,6 @@
-const MAX_GEN_NUM = 100;
-const NUM_BOXES = 30;
-const maxBoxCount = 20;
+const MAX_GEN_NUM = 1000;
+const NUM_BOXES = 50;
+const maxBoxCount = 100;
 const gameCanvas = document.getElementById("game-canvas");
 const gameCtx = gameCanvas.getContext('2d');
 const gameContainerHeight = Math.floor(document.getElementById("game-container").getBoundingClientRect().height);
@@ -102,6 +102,7 @@ function switchTool(tool) {
 }
 
 async function startGame() {
+  document.getElementById("start-game");
   // Scale the game board down so that each box is represented by a single pixel on a new "canvas" represented by a 2D array
   let gameBoardArrayInitial = [];
   for (let row = 0; row < NUM_BOXES; ++row) {
@@ -136,7 +137,7 @@ async function startGame() {
   }
 
   for (let genNum = 0; genNum < MAX_GEN_NUM; ++genNum) {
-    await sleep(250);
+    await sleep(50);
     // console.log("--------------------");
     // console.log("GENERATION " + (genNum + 1));
     // console.log("--------------------");
