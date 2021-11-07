@@ -82,7 +82,6 @@ function gameDataChange(host) {
       document.getElementById("time-per-generation").innerHTML = `Time Per Generation (ms): ${gameData.timePerGeneration}`;
       if(host) {
         document.getElementById("submit").style.display = "none";
-
       } else {
         MAX_GEN_NUM = gameData.iterations;
         NUM_BOXES = gameData.boardSize;
@@ -90,6 +89,11 @@ function gameDataChange(host) {
         TIME_PER_GENERATION = gameData.timePerGeneration;
         boxWidth = gameCanvas.width / NUM_BOXES;
         boxHeight = boxWidth;
+      }
+      if (host && gameData.player2Blocks) {
+        document.getElementById("game-state").innerHTML = "Player 2 has submitted and is waiting for your submission!";
+      } else if (!host && gameData.player1Blocks) {
+        document.getElementById("game-state").innerHTML = "Player 1 has submitted and is waiting for your submission!";
       }
       initializeGame();
     } else if (gameData.player2Present && gameData.gameState === "fight") {
