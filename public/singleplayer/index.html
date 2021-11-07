@@ -24,25 +24,25 @@
         <div id="game-parameters">
           <form method="post" name="game-parameters" id="form-game-parameters">
             <div id="number-of-pixels-input">
-              <h3>
+              <h3 id="number-of-pixels">
                 Number of Pixels
               </h3>
               <input type="text" id="maxPixelNum" name="maxPixelNum" value="30">
             </div>
-            <div id="number-of-iterations-input">
-              <h3>
-                Number of Iterations
+            <div id="number-of-generations-input">
+              <h3 id="number-of-generations">
+                Number of Generations
               </h3>
               <input type="text" id="numGenerations" name="numGenerations" value="500">
             </div>
-            <div id="number-of-board-size">
-              <h3>
+            <div id="number-of-board-size-input">
+              <h3 id="number-of-board-size">
                 Board Side Length
               </h3>
               <input type="text" id="numBoxes" name="numBoxes" value="30">
             </div>
-            <div id="time-per-generation">
-              <h3>
+            <div id="time-per-generation-input">
+              <h3 id="time-per-generation">
                 Time Per Generation (ms)
               </h3>
               <input type="text" id="timePerGen" name="timePerGen" value="50">
@@ -56,7 +56,7 @@
       </div>
       <div id="stats">
         <div style="margin-bottom: 25px;">
-          <h1>Generation Number: </h1>
+          <h2>Generation Number: </h2>
           <h1 id="genNumCounter" style="text-align: center;">0</h1>
         </div>
         <div id="help" style="margin-bottom: 25px;">

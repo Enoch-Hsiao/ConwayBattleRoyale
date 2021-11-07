@@ -202,6 +202,10 @@ function reset() {
   document.getElementById("numBoxes").disabled = false;
   document.getElementById("maxPixelNum").disabled = false;
   document.getElementById("timePerGen").disabled = false;
+  document.getElementById("number-of-pixels").innerHTML = `Number of Pixels`;
+  document.getElementById("number-of-generations").innerHTML = `Number of Generations`;
+  document.getElementById("number-of-board-size").innerHTML = `Board Side Length`;
+  document.getElementById("time-per-generation").innerHTML = `Time Per Generation (ms)`;
   document.getElementById("genNumCounter").innerHTML = 0;
   MAX_GEN_NUM = null;
   NUM_BOXES = null;

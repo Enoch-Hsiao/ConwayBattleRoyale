@@ -16,7 +16,7 @@ let database = getDatabase(app);
 // assume user is host
 let gameData = {
     maxNumPixels: 15,
-    iterations: 500,
+    generations: 500,
     boardSize: 30,
     timePerGeneration: 50,
     gameState: 'configuration'
@@ -24,7 +24,7 @@ let gameData = {
 
 let keyValueForGame = push(ref(database, 'gameSessions'), {
     maxNumPixels: 15,
-    iterations: 500,
+    generations: 500,
     boardSize: 30,
     timePerGeneration: 50,
     gameState: 'configuration'
@@ -49,7 +49,7 @@ function gameDataChange(host) {
       document.getElementById("submit-button").style.display = 'none';
       document.getElementById("join-game").style.display = "none";
       document.getElementById("max-pixel-num").innerHTML = `Number of Pixels:`;
-      document.getElementById("number-of-iterations").innerHTML = `Number of Iterations:`;
+      document.getElementById("number-of-generations").innerHTML = `Number of Generations:`;
       document.getElementById("number-of-board-size").innerHTML = `Board Side Length:`;
       document.getElementById("time-per-generation").innerHTML = `Time Per Generation (ms):`;
       player2Present = true;
@@ -77,13 +77,13 @@ function gameDataChange(host) {
       document.getElementById("form-game-parameters").style.display = "none";
       document.getElementById("player2-parameters").style.display = "block";
       document.getElementById("max-pixel-num").innerHTML = `Number of Pixels: ${gameData.maxNumPixels}`;
-      document.getElementById("number-of-iterations").innerHTML = `Number of Iterations: ${gameData.iterations}`;
+      document.getElementById("number-of-generations").innerHTML = `Number of Generations: ${gameData.generations}`;
       document.getElementById("number-of-board-size").innerHTML = `Board Side Length: ${gameData.boardSize}`;
       document.getElementById("time-per-generation").innerHTML = `Time Per Generation (ms): ${gameData.timePerGeneration}`;
       if(host) {
         document.getElementById("submit").style.display = "none";
       } else {
-        MAX_GEN_NUM = gameData.iterations;
+        MAX_GEN_NUM = gameData.generations;
         NUM_BOXES = gameData.boardSize;
         MAX_BOX_COUNT = gameData.maxNumPixels;
         TIME_PER_GENERATION = gameData.timePerGeneration;
@@ -268,7 +268,7 @@ function setParams() {
     TIME_PER_GENERATION = tpg;
     gameData = {
       maxNumPixels: mbc,
-      iterations: ng,
+      generations: ng,
       boardSize: nb,
       timePerGeneration: tpg,
       gameState: 'preparation',

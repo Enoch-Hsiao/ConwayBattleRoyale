@@ -73,6 +73,10 @@ function setParams() {
     document.getElementById("numBoxes").disabled = true;
     document.getElementById("maxPixelNum").disabled = true;
     document.getElementById("timePerGen").disabled = true;
+    document.getElementById("number-of-pixels").innerHTML = `Number of Pixels: ${mbc}`;
+    document.getElementById("number-of-generations").innerHTML = `Number of Generations: ${ng}`;
+    document.getElementById("number-of-board-size").innerHTML = `Board Side Length: ${mbc}`;
+    document.getElementById("time-per-generation").innerHTML = `Time Per Generation (ms): ${tpg}`;
     MAX_GEN_NUM = ng;
     NUM_BOXES = nb;
     MAX_BOX_COUNT = mbc;
