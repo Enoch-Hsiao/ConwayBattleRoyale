@@ -4,8 +4,11 @@
 ## Hosted on Firebase https://conwaybattleroyale.web.app/
 ## [Video demo](https://www.youtube.com/watch?v=btU_ISUt0EY)
 
+<img src="https://i.imgur.com/wV2AqQU.png" width="100%" border="0" />
+<img src="https://i.imgur.com/FtNkjeB.png" width="100%" border="0" />
+
 ## Description as a Tweet:
-Spaceships! Gliders! Oscillators! Inspired by Conway's Game of Life, players are pitted against each other to generate the longest lasting cellular automata. The player with the most cells at the end wins!
+Spaceships! Gliders! Oscillators! Inspired by Conway's Game of Life, players are pitted against each other to generate the longest lasting cellular automata. The player with the most cells at the end wins! Check it out at https://conwaybattleroyale.web.app
 
 ## Inspiration:
 We wanted to start out with a clone of the Reddit April Fools experiment, r/place. We then pivoted to Conway's Game of Life because it was more feasible to make and derive off of. Furthermore, we were able to implement a fun 1v1 game out of it.
@@ -25,7 +28,7 @@ We used JavaScript and Firebase for the game logic and backend, HTML5 and Canvas
 We had to build the logic of the game from the ground up, since there is no model for a multiplayer version of the Game of Life.
 
 ## Accomplishments we're proud of:
-Making Canvas API work, integrating Firebase, generating game PINs.
+We are proud of making the Canvas HTML API work within our application, integrating Firebase, generating game PINs, and using purely JS, CSS, and HTML files with no frameworks (No React or Angular).
 
 ## What we've learned:
 We improved our knowledge of how to use Canvas API and learned how to create new logic to better suit a multiplayer game.
@@ -34,7 +37,9 @@ We improved our knowledge of how to use Canvas API and learned how to create new
 1) Making it a true battle royale by allowing more than two players to play a game
 2) Improving the aesthetics of the game
 3) Creating a more sophisticated landing page
-4) Enabling user auth, adding leaderboards
+4) Enabling user auth, adding ladder 1v1 leaderboards
+5) Input Sanitization, Database cleanup, test suites
+6) Different rulesets, obstacles, reward/penalty states... the possibilities are endless!
 
 ## Built with:
 - Visual Studio Code
