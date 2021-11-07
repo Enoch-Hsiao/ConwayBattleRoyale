@@ -252,8 +252,8 @@ function setParams() {
   } else if(!nb || !isInt(nb) || nb < 10 || nb > 50 || nb % 2 !== 0) {
     alert("Please set the board side length to a valid even number between 10 and 50");
     return false;
-  } else if(!tpg || !isInt(tpg) || tpg < 25 || tpg > 100) {
-    alert("Please set the time per generation to a valid number between 25 and 100 ms");
+  } else if(!tpg || !isInt(tpg) || tpg < 25 || tpg > 1000) {
+    alert("Please set the time per generation to a valid number between 25 and 1000 ms");
     return false;
   } else {
     document.getElementById("numGenerations").disabled = true;
