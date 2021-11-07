@@ -1,7 +1,8 @@
 ﻿# Conway's Battle Royale
 
 ### 2021 HackUMass Submission
-### Hosted on Firebase https://conwaybattleroyale.web.app/
+## Hosted on Firebase https://conwaybattleroyale.web.app/
+## [Video demo](https://www.youtube.com/watch?v=btU_ISUt0EY)
 
 ## Description as a Tweet:
 Spaceships! Gliders! Oscillators! Inspired by Conway's Game of Life, players are pitted against each other to generate the longest lasting cellular automata. The player with the most cells at the end wins!
