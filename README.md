@@ -1,6 +1,7 @@
 ﻿# Conway's Battle Royale
 
 ### 2021 HackUMass Submission
+### Hosted on Firebase https://conwaybattleroyale.web.app/
 
 ## Description as a Tweet:
 Spaceships! Gliders! Oscillators! Inspired by Conway's Game of Life, players are pitted against each other to generate the longest lasting cellular automata. The player with the most cells at the end wins!
@@ -15,9 +16,9 @@ Our project is a strategy game that allows users to input a certain amount of pi
 We used JavaScript and Firebase for the game logic and backend, HTML5 and Canvas API for frontend, rendering, and animation. We also used Firebase, specifically its Realtime Database and hosting capabilities, to enable multiplayer functionality.
 
 ## Technologies we used:
-HTML/CSS
-Javascript
-Misc
+- HTML/CSS
+- Javascript
+- Firebase Realtime Database and Hosting
 
 ## Challenges we ran into:
 We had to build the logic of the game from the ground up, since there is no model for a multiplayer version of the Game of Life.
@@ -35,13 +36,13 @@ We improved our knowledge of how to use Canvas API and learned how to create new
 4) Enabling user auth, adding leaderboards
 
 ## Built with:
-Visual Studio Code
-GitHub
+- Visual Studio Code
+- GitHub
 
 ## Prizes we're going for:
-Best Software Hack
-Best Web Hack
-Best Beginner Software Hack
-Best Use of Google Cloud
-Best Domain Name from Domain.com
-Best Space App
+- Best Software Hack
+- Best Web Hack
+- Best Beginner Software Hack
+- Best Use of Google Cloud
+- Best Domain Name from Domain.com
+- Best Space App
