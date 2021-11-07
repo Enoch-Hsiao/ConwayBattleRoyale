@@ -7,8 +7,17 @@ html {
   color: white;
 }
 
+*{
+  text-decoration: none;
+  line-height: 20px;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif; font-weight:400;
+  letter-spacing: 2px;
+}
+
 body {
   min-width: 1000px;
+  font-family: 'Montserrat', sans-serif, Arial, Helvetica;
 }
 
 #title {
@@ -60,6 +69,7 @@ input[type=text], select {
   border-radius: 4px;
   border: 1px solid black;
   text-align: center;
+  font-size: 1em;
 }
 
 h4 {
@@ -190,7 +200,7 @@ img {
   padding: 12px 18px;
   padding: 10px 14px;
   margin: 6px 0;
-  font-size: 12px;
+  font-size: 15px;
   line-height: 19px;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -207,7 +217,7 @@ img {
   border-radius: 4%;
   border: 3px solid black;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 25px;
   text-transform: uppercase;
   font-family: 'Montserrat', sans-serif; font-weight:400;
@@ -225,7 +235,7 @@ img {
     border: 3px solid black;
     text-decoration: none;
     padding: 14px 21px;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 25px;
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif; font-weight:400;

@@ -32,7 +32,7 @@ let keyValueForGame = push(ref(database, 'gameSessions'), {
 
 let host = true
 let player2Present = false
-document.getElementById("game-PIN-value").innerHTML = 'Game PIN: ' + keyValueForGame
+document.getElementById("game-PIN-value").innerHTML = 'GAME PIN: ' + keyValueForGame
 
 const db = getDatabase()
 const dbRef = ref(getDatabase());
@@ -142,7 +142,7 @@ function checkPIN() {
       return;
     }
     keyValueForGame = PIN;
-    document.getElementById("game-PIN-value").innerHTML = 'Game PIN: ' + PIN;
+    document.getElementById("game-PIN-value").innerHTML = 'GAME PIN: ' + PIN;
     document.getElementById("join-game").style.display = "none";
     document.getElementById("star-player-1").style.display = "none";
     document.getElementById("star-player-2").style.display = "inline-block";
