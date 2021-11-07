@@ -2,6 +2,14 @@
   display: none
 }
 
+#star-player {
+  height: 25px;
+  width: 25px;
+  position: inherit;
+  z-index: 0;
+  right: auto;
+}
+
 #join-game {
   display: flex;
   justify-content: center;

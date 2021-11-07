@@ -1,7 +1,7 @@
 html {
   margin: 0;
   padding: 0;
-  overflow-x: scroll;
+  overflow-x: hidden;
   font-family: 'Montserrat', sans-serif, Arial, Helvetica;
   z-index: 1;
   color: white;
@@ -105,14 +105,16 @@ h4 {
 }
 
 .stars {
- background: #421352 url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
- position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	display: block;
-  	z-index: -3;
+  background: #421352 url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: -3;
 }
 
 .twinkling{
@@ -127,7 +129,7 @@ h4 {
     bottom: 0;
     z-index: -2;
     
-    -moz-animation:move-background 70s linear infinite;
+  -moz-animation:move-background 70s linear infinite;
   -ms-animation:move-background 70s linear infinite;
   -o-animation:move-background 70s linear infinite;
   -webkit-animation:move-background 70s linear infinite;
@@ -136,12 +138,12 @@ h4 {
 }
 
 
-img{
-  height: 70vh;
-  width:70vh;
+img {
+  height: 100vh;
+  width:100vh;
   position: absolute;
   z-index: -1;
-  right: 20px;
+  right: 0px;
 }
 
 /**/
