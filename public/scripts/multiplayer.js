@@ -75,7 +75,7 @@ function gameDataChange(host) {
       document.getElementById("player2-parameters").style.display = "block";
       document.getElementById("max-pixel-num").innerHTML = `Number of Pixels: ${gameData.maxNumPixels}`;
       document.getElementById("number-of-iterations").innerHTML = `Number of Iterations: ${gameData.iterations}`;
-      document.getElementById("number-of-board-size").innerHTML = `Board Size: ${gameData.boardSize}`;
+      document.getElementById("number-of-board-size").innerHTML = `Board Side Length: ${gameData.boardSize}`;
       document.getElementById("time-per-generation").innerHTML = `Time Per Generation (ms): ${gameData.timePerGeneration}`;
       if(host) {
         document.getElementById("submit").style.display = "none";
@@ -233,7 +233,7 @@ function setParams() {
     alert("Please set the number of generations to something between 50 and 500");
     return false;
   } else if(nb < 10 || nb > 50 || nb % 2 !== 0) {
-    alert("Please set the board size to an even number between 10 and 50");
+    alert("Please set the board side length to an even number between 10 and 50");
     return false;
   } else if(tpg < 25 || tpg > 1000) {
     alert("Please set the time per generation to something between 25 and 1000 ms");

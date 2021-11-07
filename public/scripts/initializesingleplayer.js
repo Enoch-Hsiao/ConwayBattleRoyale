@@ -54,7 +54,7 @@ function setParams() {
     alert("Please set the number of generations to something between 50 and 500");
     return false;
   } else if(nb < 10 || nb > 100 || nb % 2 !== 0) {
-    alert("Please set the board size to an even number between 10 and 100");
+    alert("Please set the board side length to an even number between 10 and 100");
     return false;
   } else if(tpg < 25 || tpg > 1000) {
     alert("Please set the time per generation to something between 25 and 1000 ms");

@@ -2,51 +2,54 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Conway Battle Royale</title>
-    <link rel="stylesheet" href="../styles/universal.css">
-    <link rel="stylesheet" href="../styles/singleplayer.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
-    <link rel="manifest" href="../images/site.webmanifest">
-    <link rel="mask-icon" href="../images/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    <title>Game</title>
+    <link rel="stylesheet" href="multiplayer.css">
   </head>
   <body>
     <div id="title">
-      <a href="../multiplayer/index.html" class='mode-button'><button class='mode-button'>Switch to 1v1 Mode</button></a>
+      <a href="index.html" class='mode-button'><button class='mode-button'>Switch to Singleplayer Mode</button></a>
     </div>
-
-
     <div id="game-container">
-      <div id="gameInfoDiv">
+      <!-- Player 1 is assumed host -->
+      <div id="player1">
+        <div id="player1-text"
+          <h3>
+          <span>
+            <img src="star.png" alt="star" width="25" height="25">
+          </span>
+          Player 1 (Host)
+          </h3>
+        </div>
+          <h2 id="game-PIN-value"> 
+            Game PIN:
+          </h2>
         <div id="game-parameters">
           <form method="post" name="game-parameters" id="form-game-parameters">
             <div id="number-of-pixels-input">
-              <h3>
+              <h4>
                 Number of Pixels
-              </h3>
-              <input type="text" id="maxPixelNum" name="maxPixelNum" value="30">
+              </h4>
+              <input type="text" id="maxPixelNum" name="maxPixelNum" value="15">
             </div>
             <div id="number-of-iterations-input">
-              <h3>
+              <h4>
                 Number of Iterations
-              </h3>
+              </h4>
               <input type="text" id="numGenerations" name="numGenerations" value="500">
             </div>
             <div id="number-of-board-size">
-              <h3>
+              <h4>
                 Board Side Length
-              </h3>
+              </h4>
               <input type="text" id="numBoxes" name="numBoxes" value="30">
             </div>
             <div id="time-per-generation">
-              <h3>
+              <h4>
                 Time Per Generation (ms)
-              </h3>
+              </h4>
               <input type="text" id="timePerGen" name="timePerGen" value="50">
             </div>
+            <!-- <input type="submit" value="Submit" onclick="setParams()"> -->
           </form>
           <button id="submit" onclick="initializeGame()">Enter</button>
         </div>
@@ -54,15 +57,22 @@
       <div id="game-board">
         <canvas id="game-canvas"></canvas>
       </div>
-      <div id="stats">
-        <div style="margin-bottom: 25px;">
-          <h1>Generation Number: </h1>
-          <h1 id="genNumCounter" style="text-align: center;">0</h1>
-        </div>
-        <div id="help" style="margin-bottom: 25px;">
+      <div id="player2">
+        <h3>
+        Player 2
+        </h3>
+        <div id="join-game">
+          <h4>
+            Join Game
+          </h4>
+          <input type="text" id="game-PIN" name="game-PIN" value="">
+          <button id="Enter Game" class="enter-game-button">Enter</button>
+          <h4 id="not-valid"></h4>
           <button id="help-button">
             ?
-          </button>
+           </button>
+        </div>
+        <div id="help">
           <div id="help-modal" class="modal">
             <div class="modal-content">
               <span class="close-button-help-model">&times;</span>
@@ -84,19 +94,14 @@
             </div>
           </div>
         </div>
-        <img id="logo" src="../images/logo.png" alt="logo">
       </div>
     </div>
     <div style="margin-top: 20px; text-align: center;">
-      <button id="filler-button" class="game-button" onclick="switchTool('f')">Fill</button>
+      <button id="filler-button" class="game-button" onclick="switchTool('f')" disabled="true">Fill</button>
       <button id="eraser-button" class="game-button" onclick="switchTool('e')">Erase</button>
       <button id="start-button" class="game-button" onclick="startGame()">Start Game!</button>
-      <button id="reset-button" class="game-button" onclick="reset()">Reset</button>
     </div>
-    <div id="background" class="stars"></div>
-    <div id="background" class="twinkling"></div>
-    <script type="text/javascript" src="../scripts/initializesingleplayer.js"></script>
-    <script type="text/javascript" src="../scripts/singleplayer.js"></script>
-    <!-- <script type="text/javascript" src="../scripts/test.js"></script> -->
+    <script type="text/javascript" src="initialize.js"></script>
+    <script type="module" src="multiplayer.js"></script>
   </body>
 </html>
