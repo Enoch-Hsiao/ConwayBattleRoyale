@@ -9,7 +9,7 @@ Spaceships! Gliders! Oscillators! Inspired by Conway's Game of Life, players are
 We wanted to start out with a clone of the Reddit April Fools experiment, r/place. We then pivoted to Conway's Game of Life because it was more feasible to make and derive off of. Furthermore, we were able to implement a fun 1v1 game out of it.
 
 ## What it does:
-Our project is a strategy game that allows users to input a certain amount of pixels onto a grid and then simulate those pixels as cells in Conway's Game of Life. Each player has a specific color for their cell. At the end of the simulation, the player with the most of their color on the grid wins the game.
+Our project is a strategy game that allows users to input a certain amount of pixels onto a grid and then simulate those pixels as cells in Conway's Game of Life. Each player has a specific color for their cell. At the end of the simulation, the player with the most of their color on the grid wins the game. We also implemented a single player sandbox mode of Conway's game of life for a player to test out strategies or just experience the game in its original form!
 
 ## How we built it:
 We used JavaScript and Firebase for the game logic and backend, HTML5 and Canvas API for frontend, rendering, and animation. We also used Firebase, specifically its Realtime Database and hosting capabilities, to enable multiplayer functionality.
