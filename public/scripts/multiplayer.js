@@ -17,19 +17,20 @@ const app = initializeApp(firebaseConfig);
 let database = getDatabase(app);
 // assume user is host
 let gameData = {
-    numPixels: 15,
+    maxNumPixels: 15,
     iterations: 500,
     boardSize: 30,
-    timerPerGeneration: 50,
+    timePerGeneration: 50,
     gameState: 'configuration'
   };
 
 let keyValueForGame = push(ref(database, 'gameSessions'), {
-    numPixels: 15,
+    maxNumPixels: 15,
     iterations: 500,
     boardSize: 30,
-    timerPerGeneration: 50,
-    gameState: 'configuration'}).key;
+    timePerGeneration: 50,
+    gameState: 'configuration'
+  }).key;
 
 let host = true
 let player2Present = false
@@ -48,9 +49,38 @@ function gameDataChange(host) {
       document.getElementById("join-game").style.display = "none";
       if(host) {
         document.getElementById("game-state").innerHTML = "Please enter your configuration for the game as the host.";
+        document.getElementById("player2-parameters").style.display = "none";
+        document.getElementById("submit").style.display = 'block';
       } else {
         document.getElementById("game-state").innerHTML = "Please wait for the host to configure the game";
+        document.getElementById("form-game-parameters").style.display = "none";
+        document.getElementById("player2-parameters").style.display = "block";
+        document.getElementById("submit").style.display = "none";
       }
+    } else if (gameData.player2Present && gameData.gameState == "preparation") {
+      document.getElementById("game-state").innerHTML = "Please prepare your blocks.";
+      document.getElementById("game-buttons").style.display = 'block';
+      document.getElementById("submit-button").style.display = 'block';
+      if(host) {
+        document.getElementById("submit").style.display = "none";
+        document.getElementById("maxPixelNum").disabled = true;
+        document.getElementById("numGenerations").disabled = true;
+        document.getElementById("numBoxes").disabled = true;
+        document.getElementById("timePerGen").disabled = true;
+
+      } else {
+        document.getElementById("max-pixel-num").innerHTML = `Number of Pixels: ${gameData.maxNumPixels}`;
+        document.getElementById("number-of-iterations").innerHTML = `Number of Iterations: ${gameData.iterations}`;
+        document.getElementById("number-of-board-size").innerHTML = `Board Size: ${gameData.boardSize}`;
+        document.getElementById("time-per-generation").innerHTML = `Time Per Generation (ms): ${gameData.timePerGeneration}`;
+        MAX_GEN_NUM = gameData.iterations;
+        NUM_BOXES = gameData.boardSize;
+        boxWidth = gameCanvas.width / NUM_BOXES;
+        boxHeight = boxWidth;
+        MAX_BOX_COUNT = gameData.maxNumPixels;
+        TIME_PER_GENERATION = gameData.timePerGeneration;
+      }
+      initializeGame();
     }
   });
 }
@@ -81,7 +111,7 @@ function checkPIN() {
     document.getElementById("star-player-1").style.display = "none";
     document.getElementById("star-player-2").style.display = "inline-block";
     data['player2Present'] = true;
-    set(ref(database, `gameSessions/${PIN}`), data).key;
+    set(ref(database, `gameSessions/${PIN}`), data);
     gameSessionRef = ref(db, `gameSessions/${PIN}`);
     gameData = data;
     host = false;
@@ -98,6 +128,10 @@ function initialConfig() {
   fillerButton.disabled = true;
   fillerButton.style.background = '#202020';
   fillerButton.style.color = 'white';
+  document.getElementById("submit").style.display = 'none';
+  document.getElementById("game-buttons").style.display = 'none';
+  document.getElementById("submit-button").style.display = 'none';
+  document.getElementById("game-state").innerHTML = "Waiting for player 2.";
   gameDataChange(true);
 }
 let helpModal = document.getElementById("help-modal");
@@ -114,6 +148,113 @@ window.onclick = function(event) {
   if (event.target === helpModal) {
     helpModal.style.display = "none";
   }
+}
+document.getElementById('submit').addEventListener('click', setParams);
+
+let MAX_GEN_NUM = null;
+let NUM_BOXES = 30;
+let MAX_BOX_COUNT = null;
+let TIME_PER_GENERATION = null;
+let CAN_EDIT = false;
+
+const gameCanvas = document.getElementById("game-canvas");
+const gameCtx = gameCanvas.getContext('2d');
+const gameContainerHeight = Math.floor(document.getElementById("game-container").getBoundingClientRect().height);
+gameCtx.imageSmoothingEnabled = false;
+gameCanvas.width = gameContainerHeight;
+gameCanvas.height = gameContainerHeight;
+
+let boxWidth = gameCanvas.width / NUM_BOXES;
+let boxHeight = boxWidth;
+
+let clicked = false;
+let numBoxesUsed = 0;
+let toolSelected = 'filler';
+
+function initializeGame() {
+
+  makeGrid();
+  gameCanvas.addEventListener('mousedown', function(e) {
+    clicked = true;
+    if (CAN_EDIT) { handleBoxClick(e); }
+  });
+  gameCanvas.addEventListener('mouseup', function(e) {
+    clicked = false;
+  });
+  gameCanvas.addEventListener('mousemove', function(e) {
+    if (clicked && CAN_EDIT) { handleBoxClick(e); }
+  });
+  document.getElementById('filler-button').addEventListener('click', function() {
+    switchTool('f');
+  })
+  document.getElementById('eraser-button').addEventListener('click', function() {
+    switchTool('e');
+  })
+  CAN_EDIT = true;
+
+}
+
+function setParams() {
+  console.log('hi')
+  let ng = document.getElementById("numGenerations").value;
+  let nb = document.getElementById("numBoxes").value;
+  let mbc = document.getElementById("maxPixelNum").value;
+  let tpg = document.getElementById("timePerGen").value;
+  if ( ng < 50 || ng > 500) {
+    alert("Please set the number of generations to something between 50 and 500");
+    return false;
+  } else if(nb < 10 || nb > 50 || nb % 2 !== 0) {
+    alert("Please set the board size to an even number between 10 and 50");
+    return false;
+  } else if(tpg < 25 || tpg > 1000) {
+    alert("Please set the time per generation to something between 25 and 1000 ms");
+    return false;
+  } else {
+    document.getElementById("numGenerations").disabled = true;
+    document.getElementById("numBoxes").disabled = true;
+    document.getElementById("maxPixelNum").disabled = true;
+    document.getElementById("timePerGen").disabled = true;
+    MAX_GEN_NUM = ng;
+    NUM_BOXES = nb;
+    boxWidth = gameCanvas.width / NUM_BOXES;
+    boxHeight = boxWidth;
+    MAX_BOX_COUNT = mbc;
+    TIME_PER_GENERATION = tpg;
+
+    set(ref(database, 'gameSessions/' + keyValueForGame), {
+      maxNumPixels: mbc,
+      iterations: ng,
+      boardSize: nb,
+      timePerGeneration: tpg,
+      gameState: 'preparation',
+      player2Present: true
+    });
+    CAN_EDIT = true;
+    return true;
+  }
+}
+
+function makeGrid() {
+  gameCtx.lineWidth = 1;
+  gameCtx.beginPath();
+  for (let row = 0; row <= NUM_BOXES; ++row) {
+    gameCtx.moveTo(0, row * boxWidth);
+    gameCtx.lineTo(gameCanvas.width, row * boxWidth);
+  }
+
+  for (let col = 0; col <= NUM_BOXES; ++col) {
+    gameCtx.moveTo(col * boxWidth, 0);
+    gameCtx.lineTo(col * boxWidth, gameCanvas.height);
+  }
+  gameCtx.stroke();
+
+  // Make the center dividing line
+  gameCtx.lineWidth = 5;
+  gameCtx.beginPath();
+  gameCtx.moveTo(Math.round(gameCanvas.width / 2 - 1), 0);
+  gameCtx.lineTo(Math.round(gameCanvas.width / 2 - 1), gameCanvas.height);
+  gameCtx.stroke();
+  gameCtx.lineWidth = 1;
 }
 
 function handleBoxClick(e) {
@@ -135,9 +276,23 @@ function handleBoxClick(e) {
     if (host && pixel[0] === 255 && pixel[1] === 0) {
       numBoxesUsed -= 1;
       colorBox(cursorPosition.x, cursorPosition.y, color);
+      // Make the center dividing line
+      gameCtx.lineWidth = 5;
+      gameCtx.beginPath();
+      gameCtx.moveTo(Math.round(gameCanvas.width / 2 - 1), 0);
+      gameCtx.lineTo(Math.round(gameCanvas.width / 2 - 1), gameCanvas.height);
+      gameCtx.stroke();
+      gameCtx.lineWidth = 1;
     } else if (!host && pixel[2] === 255 && pixel[1] === 0) {
       numBoxesUsed -= 1;
       colorBox(cursorPosition.x, cursorPosition.y, color);
+      // Make the center dividing line
+      gameCtx.lineWidth = 5;
+      gameCtx.beginPath();
+      gameCtx.moveTo(Math.round(gameCanvas.width / 2 - 1), 0);
+      gameCtx.lineTo(Math.round(gameCanvas.width / 2 - 1), gameCanvas.height);
+      gameCtx.stroke();
+      gameCtx.lineWidth = 1;
     }
   }
 }
