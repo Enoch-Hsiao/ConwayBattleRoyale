@@ -10,6 +10,14 @@
   right: auto;
 }
 
+#generation-number-div {
+  display: none;
+}
+
+#start-new-game {
+  display: none;
+}
+
 #join-game {
   display: flex;
   justify-content: center;

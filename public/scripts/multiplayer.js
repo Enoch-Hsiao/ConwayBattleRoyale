@@ -43,12 +43,18 @@ let gameSessionRef = ref(db, `gameSessions/${keyValueForGame}`);
 function gameDataChange(host) {
   onValue(gameSessionRef, (snapshot) => {
     gameData = snapshot.val();
-    console.log(gameData);
+    // console.log(gameData);
     if (gameData.player2Present && gameData.gameState == "configuration") {
+      reset();
+      document.getElementById("start-new-game").style.display = 'none';
+      gameData.player1Blocks = null;
+      gameData.player2Blocks = null;
+      document.getElementById("generation-number-div").style.display = 'none';
       player2Present = true;
       document.getElementById("join-game").style.display = "none";
       if(host) {
         document.getElementById("game-state").innerHTML = "Please enter your configuration for the game as the host.";
+        document.getElementById("form-game-parameters").style.display = "block";
         document.getElementById("player2-parameters").style.display = "none";
         document.getElementById("submit").style.display = 'block';
       } else {
@@ -68,29 +74,26 @@ function gameDataChange(host) {
       document.getElementById("submit-button").style.display = 'block';
       document.getElementById("form-game-parameters").style.display = "none";
       document.getElementById("player2-parameters").style.display = "block";
+      document.getElementById("max-pixel-num").innerHTML = `Number of Pixels: ${gameData.maxNumPixels}`;
+      document.getElementById("number-of-iterations").innerHTML = `Number of Iterations: ${gameData.iterations}`;
+      document.getElementById("number-of-board-size").innerHTML = `Board Size: ${gameData.boardSize}`;
+      document.getElementById("time-per-generation").innerHTML = `Time Per Generation (ms): ${gameData.timePerGeneration}`;
       if(host) {
         document.getElementById("submit").style.display = "none";
-        document.getElementById("max-pixel-num").innerHTML = `Number of Pixels: ${gameData.maxNumPixels}`;
-        document.getElementById("number-of-iterations").innerHTML = `Number of Iterations: ${gameData.iterations}`;
-        document.getElementById("number-of-board-size").innerHTML = `Board Size: ${gameData.boardSize}`;
-        document.getElementById("time-per-generation").innerHTML = `Time Per Generation (ms): ${gameData.timePerGeneration}`;
 
       } else {
-        document.getElementById("max-pixel-num").innerHTML = `Number of Pixels: ${gameData.maxNumPixels}`;
-        document.getElementById("number-of-iterations").innerHTML = `Number of Iterations: ${gameData.iterations}`;
-        document.getElementById("number-of-board-size").innerHTML = `Board Size: ${gameData.boardSize}`;
-        document.getElementById("time-per-generation").innerHTML = `Time Per Generation (ms): ${gameData.timePerGeneration}`;
         MAX_GEN_NUM = gameData.iterations;
         NUM_BOXES = gameData.boardSize;
-        boxWidth = gameCanvas.width / NUM_BOXES;
-        boxHeight = boxWidth;
         MAX_BOX_COUNT = gameData.maxNumPixels;
         TIME_PER_GENERATION = gameData.timePerGeneration;
+        boxWidth = gameCanvas.width / NUM_BOXES;
+        boxHeight = boxWidth;
       }
       initializeGame();
     } else if (gameData.player2Present && gameData.gameState === "fight") {
-      console.log('hi')
       document.getElementById("game-state").innerHTML = "Fight!";
+      document.getElementById("submit-button").style.display = 'none';
+      document.getElementById("generation-number-div").style.display = 'block';
       simulate2Players(gameData.player1Blocks, gameData.player2Blocks);
     }
   });
@@ -130,19 +133,6 @@ function checkPIN() {
   })
 }
 
-initialConfig();
-
-function initialConfig() {
-  let fillerButton = document.getElementById("filler-button");
-  fillerButton.disabled = true;
-  fillerButton.style.background = '#202020';
-  fillerButton.style.color = 'white';
-  document.getElementById("submit").style.display = 'none';
-  document.getElementById("game-buttons").style.display = 'none';
-  document.getElementById("submit-button").style.display = 'none';
-  document.getElementById("game-state").innerHTML = "Waiting for player 2.";
-  gameDataChange(true);
-}
 let helpModal = document.getElementById("help-modal");
 let helpButton = document.getElementById("help-button");
 let closeButtonHelpButton = document.getElementsByClassName("close-button-help-model")[0];
@@ -160,7 +150,8 @@ window.onclick = function(event) {
 }
 document.getElementById('submit').addEventListener('click', setParams);
 document.getElementById('Enter Game').addEventListener('click', checkPIN);
-document.getElementById('submit-blocks').addEventListener('click', compressBoard);
+document.getElementById('submit-button').addEventListener('click', compressBoard);
+document.getElementById('start-new-game').addEventListener('click', resetBoard);
 
 let MAX_GEN_NUM = null;
 let NUM_BOXES = 30;
@@ -182,8 +173,22 @@ let clicked = false;
 let numBoxesUsed = 0;
 let toolSelected = 'filler';
 
-function initializeGame() {
+initialConfig();
 
+function initialConfig() {
+  reset();
+  let fillerButton = document.getElementById("filler-button");
+  fillerButton.disabled = true;
+  fillerButton.style.background = '#202020';
+  fillerButton.style.color = 'white';
+  document.getElementById("submit").style.display = 'none';
+  document.getElementById("game-buttons").style.display = 'none';
+  document.getElementById("submit-button").style.display = 'none';
+  document.getElementById("game-state").innerHTML = "Waiting for player 2.";
+  gameDataChange(true);
+}
+
+function initializeGame() {
   makeGrid();
   gameCanvas.addEventListener('mousedown', function(e) {
     clicked = true;
@@ -400,7 +405,6 @@ async function simulate2Players(p1Start, p2Start) {
     }
     combinedSmallArr.push(newRow);
   }
-  console.log(combinedSmallArr);
   showOnScreen(combinedSmallArr);
   await sleep(3000);
   let previousGen = makeCopy2D(combinedSmallArr);
@@ -408,7 +412,6 @@ async function simulate2Players(p1Start, p2Start) {
 
   let player1Count = 0
   let player2Count = 0;
-  game:
   for (let genNum = 0; genNum < MAX_GEN_NUM; ++genNum) {
     let changesExist = false;
     // document.getElementById("genNumCounter").innerHTML = genNum + 1;
@@ -482,16 +485,10 @@ async function simulate2Players(p1Start, p2Start) {
       determineWinner(false, false);
       return;
     }
-    if (genNum < MAX_GEN_NUM - 1) {
-      player1Count = 0;
-      player2Count = 0;
-    }
     await(showOnScreen(nextGen));
     if (!changesExist) { break; }
     previousGen = makeCopy2D(nextGen);
   }
-  console.log(player1Count);
-  console.log(player2Count);
   if (player1Count > player2Count) {
     determineWinner(true, false);
   } else if (player1Count < player2Count) {
@@ -508,6 +505,11 @@ function determineWinner(player1Wins, isTie) {
     document.getElementById("game-state").innerHTML = "Player 2 Wins!"
   } else {
     document.getElementById("game-state").innerHTML = "Tie"
+  }
+  // cooldown
+  await sleep(5000);
+  if (host) {
+    document.getElementById("start-new-game").style.display = 'block'
   }
 }
 function compressBoard() {
@@ -533,13 +535,31 @@ function compressBoard() {
     gameData['player2Blocks'] = gameBoardArrayInitial;
   }
   set(ref(database, 'gameSessions/' + keyValueForGame), gameData);
-  document.getElementById("submit-blocks").disabled = true;
-  document.getElementById("submit-blocks").style.color = 'white';
-  document.getElementById("submit-blocks").style.blackgroundColor = 'black';
+  document.getElementById("submit-button").style.display = 'none';
   if (host && !gameData.player2Blocks || !host && !gameData.player1Blocks) {
     document.getElementById("game-state").innerHTML = "Waiting for other player to submit.";
   }
   return gameBoardArrayInitial;
 }
 
+function resetBoard() {
+  gameData.gameState = 'configuration';
+  set(ref(database, 'gameSessions/' + keyValueForGame), gameData);
+}
 function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+
+function reset() {
+  gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+  document.getElementById("numGenerations").disabled = false;
+  document.getElementById("numBoxes").disabled = false;
+  document.getElementById("maxPixelNum").disabled = false;
+  document.getElementById("timePerGen").disabled = false;
+  document.getElementById("genNumCounter").innerHTML = 0;
+  MAX_GEN_NUM = null;
+  NUM_BOXES = null;
+  MAX_BOX_COUNT = null;
+  TIME_PER_GENERATION = null;
+  clicked = false;
+  numBoxesUsed = 0;
+  document.getElementById("submit").disabled = false;
+}

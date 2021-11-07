@@ -14,20 +14,17 @@
     <div id="game-container">
       <!-- Player 1 is assumed host -->
       <div id="player1">
-        <div id="player1-text"
+        <div id="player1-text">
           <h3>
-          <span id="star-player-1">
-            <img id="star-player" src="star.png" alt="star" width="25" height="25">
-          </span>
+            <span id="star-player-1">
+              <img id="star-player" src="star.png" alt="star" width="25" height="25">
+            </span>
           Player 1 (Host)
           </h3>
         </div>
           <h2 id="game-PIN-value">
             Game PIN:
           </h2>
-        <h3>
-        Player 1
-        </h3>
         <div id="game-parameters">
           <div id="player2-parameters">
             <h4 id="max-pixel-num">
@@ -79,10 +76,10 @@
       <div id="player2">
         <div id="player2-text">
           <h3>
-          <span id="star-player-2">
-            <img id="star-player" src="star.png" alt="star" width="25" height="25">
-          </span>
-          Player 2
+            <span id="star-player-2">
+              <img id="star-player" src="star.png" alt="star" width="25" height="25">
+            </span>
+            Player 2
           </h3>
         </div>
         <div id="join-game">
@@ -92,6 +89,10 @@
           <input type="text" id="game-PIN" name="game-PIN" value="">
           <button id="Enter Game" class="enter-game-button">Enter</button>
           <h4 id="not-valid"></h4>
+        </div>
+        <div id="generation-number-div">
+          <h1>Generation Number: </h1>
+          <h1 id="genNumCounter" style="text-align: center;">0</h1>
         </div>
         <div id="help">
           <button id="help-button">
@@ -120,6 +121,9 @@
         </div>
         <div id="submit-button">
           <button id="submit-blocks" class="game-button">Submit Blocks!</button>
+        </div>
+        <div id="start-game-button">
+          <button id="start-new-game" class="game-button">Start New Game</button>
         </div>
       </div>
     </div>
