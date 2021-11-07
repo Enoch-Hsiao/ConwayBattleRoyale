@@ -1,4 +1,4 @@
-﻿# ConwaysBattleRoyale
+﻿# Conway's Battle Royale
 
 ### 2021 HackUMass Submission
 
