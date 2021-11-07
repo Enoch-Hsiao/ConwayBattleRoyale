@@ -45,19 +45,28 @@ function initializeGame() {
   }
 }
 
+function isInt(value) {
+  return !isNaN(value) && 
+         parseInt(Number(value)) == value && 
+         !isNaN(parseInt(value, 10));
+}
+
 function setParams() {
   let ng = document.getElementById("numGenerations").value;
   let nb = document.getElementById("numBoxes").value;
   let mbc = document.getElementById("maxPixelNum").value;
   let tpg = document.getElementById("timePerGen").value;
-  if ( ng < 50 || ng > 500) {
-    alert("Please set the number of generations to something between 50 and 500");
+  if (!mbc || !isInt(mbc) || mbc < 0) {
+    alert("Please set the max number of pixels to a valid number greater than 0");
     return false;
-  } else if(nb < 10 || nb > 100 || nb % 2 !== 0) {
-    alert("Please set the board side length to an even number between 10 and 100");
+  } else if (!ng || !isInt(ng) || ng < 25 || ng > 100000) {
+    alert("Please set the number of generations to a valid number between 25 and 100000");
     return false;
-  } else if(tpg < 25 || tpg > 1000) {
-    alert("Please set the time per generation to something between 25 and 1000 ms");
+  } else if (!nb || !isInt(nb) || nb < 10 || nb > 50 || nb % 2 !== 0) {
+    alert("Please set the board side length to a valid even number between 10 and 50");
+    return false;
+  } else if(!tpg || !isInt(tpg) || tpg < 25 || tpg > 1000) {
+    alert("Please set the time per generation to a valid number between 25 and 1000 ms");
     return false;
   } else {
     document.getElementById("numGenerations").disabled = true;
