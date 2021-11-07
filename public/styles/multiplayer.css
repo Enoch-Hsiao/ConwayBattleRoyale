@@ -8,11 +8,3 @@
   align-items: center;
   flex-direction: column;
 }
-
-#player2 {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  margin: 5px;
-}

@@ -29,8 +29,7 @@ let keyValueForGame = push(ref(database, 'gameSessions'), {
     iterations: 500,
     boardSize: 30,
     timerPerGeneration: 50,
-    gameState: 'configuration'
-  }).key;
+    gameState: 'configuration'}).key;
 
 let host = true
 let player2Present = false
@@ -71,11 +70,11 @@ function checkPIN() {
     if (!snapshot.exists()) {
       document.getElementById("not-valid").innerHTML = 'No game found for game PIN!';
       return;
-    } 
+    }
     if (data.player2Present) {
       document.getElementById("not-valid").innerHTML = 'Game is already full!';
       return;
-    } 
+    }
     keyValueForGame = PIN;
     document.getElementById("game-PIN-value").innerHTML = 'Game PIN:' + PIN;
     document.getElementById("join-game").style.display = "none";
@@ -122,15 +121,24 @@ function handleBoxClick(e) {
   let pixel = gameCtx.getImageData(cursorPosition.x, cursorPosition.y, 1, 1).data;
   // If the pixel has 0 opacity then color it in when clicked (0 opacity means white)
   if (toolSelected === "filler" && (pixel[3] === 0 || pixel[0] === 255 && pixel[1] === 255 && pixel[2] === 255) && numBoxesUsed < MAX_BOX_COUNT) {
-    let color = "#FF0000";
-    // TODO: UPDATE LIVE COUNTER ON SCREEN
-    numBoxesUsed += 1;
-    colorBox(cursorPosition.x, cursorPosition.y, color);
-  } else if (toolSelected === "eraser" && pixel[0] === 255 && pixel[1] === 0) {
+    if (host && cursorPosition.x < gameCanvas.width / 2) {
+      let color = "#FF0000";
+      numBoxesUsed += 1;
+      colorBox(cursorPosition.x, cursorPosition.y, color);
+    } else if (!host && cursorPosition.x > gameCanvas.width / 2) {
+      let color = "#0000FF";
+      numBoxesUsed += 1;
+      colorBox(cursorPosition.x, cursorPosition.y, color);
+    }
+  } else if (toolSelected === "eraser") {
     let color = "#FFFFFF";
-    // TODO: UPDATE LIVE COUNTER ON SCREEN
-    numBoxesUsed -= 1;
-    colorBox(cursorPosition.x, cursorPosition.y, color);
+    if (host && pixel[0] === 255 && pixel[1] === 0) {
+      numBoxesUsed -= 1;
+      colorBox(cursorPosition.x, cursorPosition.y, color);
+    } else if (!host && pixel[2] === 255 && pixel[1] === 0) {
+      numBoxesUsed -= 1;
+      colorBox(cursorPosition.x, cursorPosition.y, color);
+    }
   }
 }
 

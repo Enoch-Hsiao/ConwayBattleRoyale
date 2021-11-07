@@ -20,6 +20,7 @@ let toolSelected = null;
 
 function initializeGame() {
   if(setParams()) {
+    document.getElementById("submit").disabled = true;
     makeGrid();
     gameCanvas.addEventListener('mousedown', function(e) {
       clicked = true;

@@ -23,6 +23,14 @@ body {
   margin: 5px;
 }
 
+#player2 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin: 5px;
+}
+
 #gameInfoDiv {
   display: flex;
   align-items: center;
@@ -78,14 +86,6 @@ h4 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-#player2 {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  margin: 5px;
 }
 
 .buttons {

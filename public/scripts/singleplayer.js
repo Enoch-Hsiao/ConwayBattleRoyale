@@ -187,15 +187,6 @@ function showOnScreen(generationInfo) {
       } else {
         colorBox(x, y, "#FFFFFF");
       }
-      // gameCtx.beginPath();
-      // if (i >= 3 && i <= 10) {
-      //   gameCtx.fillStyle = "blue";
-      // }
-      // if (j >= 3 && j <= 10) {
-      //   gameCtx.fillStyle = "blue";
-      // }
-      // gameCtx.fillRect(x - 4, y - 4, 8, 8);
-      // gameCtx.stroke();
     }
   }
 }
@@ -203,6 +194,7 @@ function showOnScreen(generationInfo) {
 function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
 function reset() {
+  gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
   document.getElementById("start-button").disabled = false;
   document.getElementById("numGenerations").disabled = false;
   document.getElementById("numBoxes").disabled = false;
@@ -215,5 +207,5 @@ function reset() {
   TIME_PER_GENERATION = null;
   clicked = false;
   numBoxesUsed = 0;
-  gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+  document.getElementById("submit").disabled = false;
 }
