@@ -28,3 +28,14 @@
 #player2-parameters {
   display: none;
 }
+
+/* Modal Content */
+.modal-content {
+  margin: auto;
+  padding: 20px;
+  width: 600px;
+  height: 60%;
+  background: white;
+  border: 3px solid black;
+  color: black;
+}

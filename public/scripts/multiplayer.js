@@ -1,17 +1,15 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js'
 import { getDatabase, ref, set, push, child, get, onValue } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-database.js";
 
-// TODO: Replace the following with your app's Firebase project configuration
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAODKoKrUY4-8QWpN_jnunw5So9LvG3ERM",
-  authDomain: "conways-game-of-death.firebaseapp.com",
-  databaseURL: "https://conways-game-of-death-default-rtdb.firebaseio.com",
-  projectId: "conways-game-of-death",
-  storageBucket: "conways-game-of-death.appspot.com",
-  messagingSenderId: "493535520033",
-  appId: "1:493535520033:web:fb20cbcc9f5bfdf3b88a60"
+  apiKey: "AIzaSyDKgqYntAREPNvVCrnhFyPCW88CbLjnEEU",
+  authDomain: "conwaybattleroyale.firebaseapp.com",
+  projectId: "conwaybattleroyale",
+  storageBucket: "conwaybattleroyale.appspot.com",
+  messagingSenderId: "399526712961",
+  appId: "1:399526712961:web:50fd2048336be7bdeb1f80"
 };
-
 const app = initializeApp(firebaseConfig);
 
 let database = getDatabase(app);
@@ -34,7 +32,7 @@ let keyValueForGame = push(ref(database, 'gameSessions'), {
 
 let host = true
 let player2Present = false
-document.getElementById("game-PIN-value").innerHTML = 'Game PIN:' + keyValueForGame
+document.getElementById("game-PIN-value").innerHTML = 'Game PIN: ' + keyValueForGame
 
 const db = getDatabase()
 const dbRef = ref(getDatabase());
@@ -47,11 +45,12 @@ function gameDataChange(host) {
     if (gameData.player2Present && gameData.gameState == "configuration") {
       reset();
       document.getElementById("start-new-game").style.display = 'none';
+      document.getElementById("generation-number-div").style.display = 'none';
+      document.getElementById("submit-button").style.display = 'none';
+      document.getElementById("join-game").style.display = "none";
       gameData.player1Blocks = null;
       gameData.player2Blocks = null;
-      document.getElementById("generation-number-div").style.display = 'none';
       player2Present = true;
-      document.getElementById("join-game").style.display = "none";
       if(host) {
         document.getElementById("game-state").innerHTML = "Please enter your configuration for the game as the host.";
         document.getElementById("form-game-parameters").style.display = "block";
@@ -91,12 +90,27 @@ function gameDataChange(host) {
       }
       initializeGame();
     } else if (gameData.player2Present && gameData.gameState === "fight") {
-      document.getElementById("game-state").innerHTML = "Fight!";
+      document.getElementById("game-state").innerHTML = `Countdown 3`;
+      countdownGame();
       document.getElementById("submit-button").style.display = 'none';
       document.getElementById("generation-number-div").style.display = 'block';
-      simulate2Players(gameData.player1Blocks, gameData.player2Blocks);
     }
   });
+}
+
+function countdownGame() {
+  let countDownDate = new Date().getTime() + 4000;
+  let timer = setInterval(function() {
+    let now = new Date().getTime();
+    let distance = countDownDate - now;
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("game-state").innerHTML = `Countdown ${seconds}`;
+    if (seconds < 1) {
+      clearInterval(timer);
+      document.getElementById("game-state").innerHTML = "Fight!";
+      simulate2Players(gameData.player1Blocks, gameData.player2Blocks);
+    }
+  }, 100);
 }
 
 function checkPIN() {
@@ -120,7 +134,7 @@ function checkPIN() {
       return;
     }
     keyValueForGame = PIN;
-    document.getElementById("game-PIN-value").innerHTML = 'Game PIN:' + PIN;
+    document.getElementById("game-PIN-value").innerHTML = 'Game PIN: ' + PIN;
     document.getElementById("join-game").style.display = "none";
     document.getElementById("star-player-1").style.display = "none";
     document.getElementById("star-player-2").style.display = "inline-block";
@@ -414,7 +428,7 @@ async function simulate2Players(p1Start, p2Start) {
   let player2Count = 0;
   for (let genNum = 0; genNum < MAX_GEN_NUM; ++genNum) {
     let changesExist = false;
-    // document.getElementById("genNumCounter").innerHTML = genNum + 1;
+    document.getElementById("genNumCounter").innerHTML = genNum + 1;
     await sleep(TIME_PER_GENERATION);
     if (genNum < MAX_GEN_NUM - 1) {
       player1Count = 0;
@@ -498,7 +512,7 @@ async function simulate2Players(p1Start, p2Start) {
   } 
 }
 
-function determineWinner(player1Wins, isTie) {
+async function determineWinner(player1Wins, isTie) {
   if(player1Wins) {
     document.getElementById("game-state").innerHTML = "Player 1 Wins!"
   } else if (!player1Wins & !isTie) {
@@ -506,12 +520,12 @@ function determineWinner(player1Wins, isTie) {
   } else {
     document.getElementById("game-state").innerHTML = "Tie"
   }
-  // cooldown
-  await sleep(5000);
+  await sleep(3000);
   if (host) {
-    document.getElementById("start-new-game").style.display = 'block'
+    document.getElementById("start-new-game").style.display = 'block';
   }
 }
+
 function compressBoard() {
   let gameBoardArrayInitial = [];
   for (let row = 0; row < NUM_BOXES; ++row) {

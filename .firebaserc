@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "conways-game-of-death"
-  }
+    "default": "conways-game-of-death",
+    "production": "conwayroyale",
+    "staging": "conwaybattleroyale"
+  },
+  "targets": {}
 }

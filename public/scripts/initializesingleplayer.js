@@ -17,7 +17,15 @@ let boxHeight = boxWidth;
 
 let clicked = false;
 let numBoxesUsed = 0;
-let toolSelected = null;
+let toolSelected = 'filler';
+let fillerButton = document.getElementById("filler-button");
+fillerButton.disabled = true;
+fillerButton.style.background = '#202020';
+fillerButton.style.color = 'white';
+let eraserButton = document.getElementById("eraser-button");
+eraserButton.disabled = false;
+eraserButton.style.background = 'white';
+eraserButton.style.color = 'black';
 
 function initializeGame() {
   if(setParams()) {

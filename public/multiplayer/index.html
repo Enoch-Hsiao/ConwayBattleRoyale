@@ -2,29 +2,36 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Game</title>
+    <title>Conway Battle Royale</title>
     <link rel="stylesheet" href="../styles/universal.css">
     <link rel="stylesheet" href="../styles/multiplayer.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="manifest" href="../images/site.webmanifest">
+    <link rel="mask-icon" href="../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
   </head>
   <body>
     <div id="title">
       <a href="../singleplayer/index.html" class='mode-button'><button class='mode-button'>Switch to Singleplayer Mode</button></a>
-      <h3 id="game-state"></h3>
+      <h2 id="game-state"></h2>
     </div>
     <div id="game-container">
       <!-- Player 1 is assumed host -->
       <div id="player1">
         <div id="player1-text">
-          <h3>
+          <h2>
             <span id="star-player-1">
               <img id="star-player" src="star.png" alt="star" width="25" height="25">
             </span>
           Player 1 (Host)
-          </h3>
-        </div>
-          <h2 id="game-PIN-value">
-            Game PIN:
           </h2>
+        </div>
+          <h3 id="game-PIN-value">
+            Game PIN:
+          </h3>
         <div id="game-parameters">
           <div id="player2-parameters">
             <h4 id="max-pixel-num">
@@ -68,6 +75,9 @@
             <!-- <input type="submit" value="Submit" onclick="setParams()"> -->
           </form>
           <button id="submit">Start Game</button>
+          <div id="start-game-button">
+            <button id="start-new-game" class="game-button">Start New Game</button>
+          </div>
         </div>
       </div>
       <div id="game-board">
@@ -75,17 +85,17 @@
       </div>
       <div id="player2">
         <div id="player2-text">
-          <h3>
+          <h2>
             <span id="star-player-2">
               <img id="star-player" src="star.png" alt="star" width="25" height="25">
             </span>
             Player 2
-          </h3>
+          </h2>
         </div>
         <div id="join-game">
-          <h4>
+          <h2>
             Join Game
-          </h4>
+          </h2>
           <input type="text" id="game-PIN" name="game-PIN" value="">
           <button id="Enter Game" class="enter-game-button">Enter</button>
           <h4 id="not-valid"></h4>
@@ -101,29 +111,36 @@
           <div id="help-modal" class="modal">
             <div class="modal-content">
               <span class="close-button-help-model">&times;</span>
-              <h2>Single Player Rules</h2>
+              <h2>Two Player Rules</h2>
               <p>
-                Rules (via John Conway):
+                2 players fight to the death in the Conway Game of Life 1v1 adaptation.
+                Each player can place pixels on their side of their board, and after submission,
+                a simulation will be ran to see who will remain victorious!
+              </p>
+              <p>
+                Rules:
               </p>
               <p>
                 1. Any live cell with two or three live neighbours survives.
               </p>
               <p>
-                2. Any dead cell with three live neighbours becomes a live cell.
+                2. Any dead cell with three live neighbours becomes a live cell of the player with the most neighbors for that cell. 
               </p>
               <p>
                 3. All other live cells die in the next generation. All other dead cells stay dead.
+              </p>
+              <p>
+                If a player reaches a cell population count of 0 while the other player still has cells remaining, that player wins.
+                If the number of iterations reaches its end or a stale state occurs, whoever has the most cells at the end is the winner.
               </p>
               <h2>Credits</h2>
               <a target="_blank" href="https://github.com/Enoch-Hsiao/Conways-Game-Of-Death">GitHub Repo</a>
             </div>
           </div>
         </div>
+        <img id="logo" src="../images/logo.png" alt="logo">
         <div id="submit-button">
           <button id="submit-blocks" class="game-button">Submit Blocks!</button>
-        </div>
-        <div id="start-game-button">
-          <button id="start-new-game" class="game-button">Start New Game</button>
         </div>
       </div>
     </div>

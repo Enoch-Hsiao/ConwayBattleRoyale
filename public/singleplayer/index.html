@@ -2,8 +2,16 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Game</title>
+    <title>Conway Battle Royale</title>
     <link rel="stylesheet" href="../styles/universal.css">
+    <link rel="stylesheet" href="../styles/multiplayer.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="manifest" href="../images/site.webmanifest">
+    <link rel="mask-icon" href="../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
   </head>
   <body>
     <div id="title">
@@ -16,27 +24,27 @@
         <div id="game-parameters">
           <form method="post" name="game-parameters" id="form-game-parameters">
             <div id="number-of-pixels-input">
-              <h4>
+              <h3>
                 Number of Pixels
-              </h4>
+              </h3>
               <input type="text" id="maxPixelNum" name="maxPixelNum" value="30">
             </div>
             <div id="number-of-iterations-input">
-              <h4>
+              <h3>
                 Number of Iterations
-              </h4>
+              </h3>
               <input type="text" id="numGenerations" name="numGenerations" value="500">
             </div>
             <div id="number-of-board-size">
-              <h4>
+              <h3>
                 Board Size
-              </h4>
+              </h3>
               <input type="text" id="numBoxes" name="numBoxes" value="30">
             </div>
             <div id="time-per-generation">
-              <h4>
+              <h3>
                 Time Per Generation (ms)
-              </h4>
+              </h3>
               <input type="text" id="timePerGen" name="timePerGen" value="50">
             </div>
           </form>
@@ -47,11 +55,11 @@
         <canvas id="game-canvas"></canvas>
       </div>
       <div id="stats">
-        <div style="margin-bottom: 100px;">
+        <div style="margin-bottom: 25px;">
           <h1>Generation Number: </h1>
           <h1 id="genNumCounter" style="text-align: center;">0</h1>
         </div>
-        <div id="help">
+        <div id="help" style="margin-bottom: 25px;">
           <button id="help-button">
             ?
           </button>
@@ -76,6 +84,7 @@
             </div>
           </div>
         </div>
+        <img id="logo" src="../images/logo.png" alt="logo">
       </div>
     </div>
     <div style="margin-top: 20px; text-align: center;">

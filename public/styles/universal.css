@@ -104,6 +104,13 @@ h4 {
 	}
 }
 
+#logo {
+  height: 200px;
+  width: 200px;
+  position: inherit;
+  z-index: 0;
+}
+
 .stars {
   background: #421352 url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
   position: fixed;
@@ -187,7 +194,7 @@ img {
   line-height: 19px;
   text-transform: uppercase;
   letter-spacing: 3px;
-  width: 50%;
+  width: 75%;
   border: 3px solid black;
   -webkit-transition: all .4s ease-in-out;
       -moz-transition: all .4s ease-in-out;
