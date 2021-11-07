@@ -48,8 +48,10 @@ function gameDataChange(host) {
       document.getElementById("generation-number-div").style.display = 'none';
       document.getElementById("submit-button").style.display = 'none';
       document.getElementById("join-game").style.display = "none";
-      gameData.player1Blocks = null;
-      gameData.player2Blocks = null;
+      document.getElementById("max-pixel-num").innerHTML = `Number of Pixels:`;
+      document.getElementById("number-of-iterations").innerHTML = `Number of Iterations:`;
+      document.getElementById("number-of-board-size").innerHTML = `Board Side Length:`;
+      document.getElementById("time-per-generation").innerHTML = `Time Per Generation (ms):`;
       player2Present = true;
       if(host) {
         document.getElementById("game-state").innerHTML = "Please enter your configuration for the game as the host.";
@@ -61,6 +63,7 @@ function gameDataChange(host) {
         document.getElementById("form-game-parameters").style.display = "none";
         document.getElementById("player2-parameters").style.display = "block";
         document.getElementById("submit").style.display = "none";
+        
       }
     } else if (gameData.player2Present && gameData.gameState == "preparation") {
       if (gameData.player1Blocks && gameData.player2Blocks) {
@@ -558,6 +561,8 @@ function compressBoard() {
 
 function resetBoard() {
   gameData.gameState = 'configuration';
+  gameData.player1Blocks = null;
+  gameData.player2Blocks = null;
   set(ref(database, 'gameSessions/' + keyValueForGame), gameData);
 }
 function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
