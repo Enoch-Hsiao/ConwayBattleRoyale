@@ -1,8 +1,9 @@
 let MAX_GEN_NUM = null;
-let NUM_BOXES = 30;
+let NUM_BOXES = null;
 let MAX_BOX_COUNT = null;
 let TIME_PER_GENERATION = null;
 let CAN_EDIT = false;
+let resetGame = false;
 
 const gameCanvas = document.getElementById("game-canvas");
 const gameCtx = gameCanvas.getContext('2d');
@@ -11,7 +12,7 @@ gameCtx.imageSmoothingEnabled = false;
 gameCanvas.width = gameContainerHeight;
 gameCanvas.height = gameContainerHeight;
 
-let boxWidth = gameCanvas.width / NUM_BOXES;
+let boxWidth = null;
 let boxHeight = boxWidth;
 
 let clicked = false;
@@ -44,8 +45,8 @@ function setParams() {
   if ( ng < 50 || ng > 500) {
     alert("Please set the number of generations to something between 50 and 500");
     return false;
-  } else if(nb < 10 || nb > 50 || nb % 2 !== 0) {
-    alert("Please set the board size to an even number between 10 and 50");
+  } else if(nb < 10 || nb > 100 || nb % 2 !== 0) {
+    alert("Please set the board size to an even number between 10 and 100");
     return false;
   } else if(tpg < 25 || tpg > 1000) {
     alert("Please set the time per generation to something between 25 and 1000 ms");
@@ -60,6 +61,9 @@ function setParams() {
     MAX_BOX_COUNT = mbc;
     TIME_PER_GENERATION = tpg;
     CAN_EDIT = true;
+    boxWidth = gameCanvas.width / NUM_BOXES;
+    boxHeight = boxWidth;
+    resetGame = false;
     return true;
   }
 }
